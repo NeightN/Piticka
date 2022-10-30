@@ -226,12 +226,6 @@ group by people.name, types.typ, month(date);
 Alter table types
 add davky float;
 
-ALTER TABLE types
-MODIFY COLUMN davky numeric;
-
-ALTER TABLE types
-DROP COLUMN davky;
-
 UPDATE `coffe_lmsoft_cz`.`types` SET davky = 0.05 WHERE (`ID` = '1');
 UPDATE `coffe_lmsoft_cz`.`types` SET `davky` = 0.07 WHERE (`ID` = '2');
 UPDATE `coffe_lmsoft_cz`.`types` SET `davky` = '0.14' WHERE (`ID` = '3');
