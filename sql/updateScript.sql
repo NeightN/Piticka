@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 2.11.4
--- http://www.phpmyadmin.net
---
--- Počítač: localhost
--- Vygenerováno: Pondělí 17. října 2022, 18:41
--- Verze MySQL: 5.0.51
--- Verze PHP: 5.2.5
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
