@@ -1,0 +1,119 @@
+.wide {
+    width: 100%;
+    height: 300px;
+    background-image: url('https://cdn.pixabay.com/photo/2016/08/03/09/03/universe-1566159_960_720.jpg');
+    background-size: cover;
+  }
+  
+  .main-height .footer-height {
+    height: auto;
+  }
+  
+  .footer-height {
+    padding: 5%;
+  }
+  
+  .background-main {
+    background-color: rgb(48, 54, 61);
+    padding-bottom: 1px;
+    padding-top: 1px;
+  }
+  
+  ul.markers {
+    list-style-type: square;
+  }
+  
+  #navIcons .bi {
+    font-size: 25px;
+  }
+  
+  #social .bi {
+    font-size: 35px;
+  }
+  
+  #search-icon i{
+  color: white;
+  }
+  
+  #navIcons i {
+    color: #00BFFF;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  
+  #search-icon i{
+  color: white;
+  }
+  
+  #color-button .btn-primary:hover {
+    background-color: #056fc7;
+    border: #056fc7;
+  }
+  
+  #color-button .btn-primary {
+    background-color: #00BFFF;
+    border: #00BFFF;
+  }
+  
+  #color-button .btn-secondary {
+    background-color: rgba(126, 126, 126, 0.932);
+    border: rgba(126, 126, 126, 0.932);
+  }
+  
+  #form-radius .btn {
+    border-radius: 0%;
+  }
+  
+  #form-radius .form-control {
+    border-radius: 0%;
+  }
+  
+  #color-text p {
+    color: #00BFFF;
+  }
+  
+  #color-text h1 {
+    color: #056fc7;
+  }
+  
+  #color-text h3 {
+    color: #056fc7;
+  }
+  
+  #color-text ul {
+    color: #00BFFF;
+  }
+  
+  #color-text tr {
+    color: #00BFFF;
+  }
+  
+  #navIcons .nav-link.active {
+    background-color: rgb(57, 86, 167);
+  }
+
+  #color-text .nav-link {
+    color: #00BFFF;
+  }
+  
+  #color-text .nav-link:hover {
+    color: #056fc7;
+  }
+  
+  #list-s-t li {
+    list-style-type: none;
+  }
+  
+  #color-text .offcanvas-title{
+    color: #056fc7;
+  }
+  
+  #color-text .form-label{
+    color: #00BFFF;
+  }
+
+  .dropdownForPeople{
+    padding: 5px;
+  }
