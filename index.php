@@ -25,10 +25,10 @@
                     </div>
 
                     <div class="offcanvas-body">
-                        <form action="/action_page.php" class="was-validated">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="was-validated">
                             <!-- Name -->
                             <div class="mb-3 mt-3">
-                                <label for="uname1" class="form-label">Jméno:</label>
+                                <label for="uname" class="form-label">Jméno:</label>
                                 <input type="text" class="form-control" id="uname1" placeholder="Jméno" name="uname" required>
                                 <div class="valid-feedback">V pořádku.</div>
                                 <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
@@ -42,8 +42,15 @@
                             </div>
                             <!-- Password -->
                             <div class="mb-3">
-                                <label for="pwd1" class="form-label">Heslo:</label>
+                                <label for="pswd" class="form-label">Heslo:</label>
                                 <input type="password" class="form-control" id="pwd1" placeholder="Heslo" name="pswd" required>
+                                <div class="valid-feedback">V pořádku.</div>
+                                <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
+                            </div>
+                            <!-- Check password -->
+                            <div class="mb-3">
+                                <label for="repeat_pswd" class="form-label">Znovu heslo:</label>
+                                <input type="password" class="form-control" id="pwd2" placeholder="Heslo" name="repeat_pswd" required>
                                 <div class="valid-feedback">V pořádku.</div>
                                 <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
                             </div>
@@ -67,7 +74,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <form action="/action_page.php" class="was-validated">
+                        <form action="user/login.php" method="POST" class="was-validated">
                             <!-- Name -->
                             <div class="mb-3 mt-3">
                                 <label for="uname2" class="form-label">Jméno:</label>

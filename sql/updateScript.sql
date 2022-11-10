@@ -230,7 +230,7 @@ Alter table people
 add password varchar(158);
 
 Alter table people
-add admin bit;
+add admin boolean;
 
 UPDATE `coffe_lmsoft_cz`.`types` SET davky = 0.05 WHERE (`ID` = '1');
 UPDATE `coffe_lmsoft_cz`.`types` SET `davky` = 0.07 WHERE (`ID` = '2');
