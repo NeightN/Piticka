@@ -226,8 +226,24 @@ group by people.name, types.typ, month(date);
 Alter table types
 add davky float;
 
+Alter table people
+add password varchar(158);
+
+Alter table people
+add admin bit;
+
 UPDATE `coffe_lmsoft_cz`.`types` SET davky = 0.05 WHERE (`ID` = '1');
 UPDATE `coffe_lmsoft_cz`.`types` SET `davky` = 0.07 WHERE (`ID` = '2');
 UPDATE `coffe_lmsoft_cz`.`types` SET `davky` = '0.14' WHERE (`ID` = '3');
 UPDATE `coffe_lmsoft_cz`.`types` SET `davky` = '0.14' WHERE (`ID` = '4');
 UPDATE `coffe_lmsoft_cz`.`types` SET `davky` = '0.21' WHERE (`ID` = '5');
+
+create table resetPassword(
+id int primary key auto_increment,
+docastny_psd varchar(158),
+people_id int not null,
+constraint people_fk foreign key (people_id) references people(ID),
+datum date
+);
+
+
