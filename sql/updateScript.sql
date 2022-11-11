@@ -246,4 +246,9 @@ constraint people_fk foreign key (people_id) references people(ID),
 datum date
 );
 
+UPDATE `coffe_lmsoft_cz`.`people` SET `admin` = '0' WHERE (`ID` = '1');
+UPDATE `coffe_lmsoft_cz`.`people` SET `admin` = '0' WHERE (`ID` = '2');
+UPDATE `coffe_lmsoft_cz`.`people` SET `admin` = '0' WHERE (`ID` = '3');
+INSERT INTO `coffe_lmsoft_cz`.`people` (`name`, `email`, `password`, `admin`) VALUES ('coffemaster', 'prokop.svacina@gmail.com', '1234', '1');
+
 

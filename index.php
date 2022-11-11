@@ -13,6 +13,15 @@
 </head>
 
 <body id="color-button">
+
+    <?php
+        if($_POST['alert'];)
+        {
+            alert($_POST['alert'];)
+        }
+    ?>
+
+
     <div id="color-text">
         <div id="form-radius">
             <!-- Header -->
@@ -25,7 +34,8 @@
                     </div>
 
                     <div class="offcanvas-body">
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="was-validated">
+                    <!--echo htmlspecialchars($_SERVER["PHP_SELF"]); -->
+                        <form action="user/register.php" method="POST" class="was-validated">
                             <!-- Name -->
                             <div class="mb-3 mt-3">
                                 <label for="uname" class="form-label">Jméno:</label>
