@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 */
 
+//kontrola existujících jmen
 if (trim($_POST["uname"]) !== "") {
     $sql = "SELECT ID FROM people WHERE name = ?";
 
@@ -42,12 +43,45 @@ if (trim($_POST["uname"]) !== "") {
             $stmt->store_result();
 
             if ($stmt->num_rows() >= 1) {
-                
-                
-                
+                //--------------------
+                session_start();
+                $errUserIsExist = true;
+                $_SESSION['errUserIsExist'] = $errUserIsExist;
+                //--------------------
+                header("location: ../index.php");
                 die();
             } else {
                 $name = trim($_POST["uname"]);
+            }
+        } else {
+            echo "Something went wrong.";
+            die();
+        }
+        $stmt->close();
+    }
+}
+
+//kontrola existujících emailů
+if (trim($_POST["mail"]) !== "") {
+    $sql = "SELECT ID FROM people WHERE email = ?";
+
+    if ($stmt = $conn->prepare($sql)) {
+        $param_mail = trim($_POST["mail"]);
+        $stmt->bind_param("s", $param_mail);
+
+        if ($stmt->execute()) {
+            $stmt->store_result();
+
+            if ($stmt->num_rows() >= 1) {
+                //--------------------
+                session_start();
+                $errEmailIsExist = true;
+                $_SESSION['errEmailIsExist'] = $errEmailIsExist;
+                //--------------------
+                header("location: ../index.php");
+                die();
+            } else {
+                $mail = trim($_POST["mail"]);
             }
         } else {
             echo "Something went wrong.";

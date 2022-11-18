@@ -6,8 +6,9 @@
     <title>Piticka</title>
     <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 
 </head>
@@ -15,10 +16,29 @@
 <body id="color-button">
 
     <?php
-        if($_POST['alert'];)
+    /*
+        if($_POST['alert'])
         {
-            alert($_POST['alert'];)
+            alert($_POST['alert']);
         }
+    */
+    session_start();
+    $errUserIsExist = $_SESSION['errUserIsExist'];
+    $errEmailIsExist = $_SESSION['errEmailIsExist'];
+    if($errUserIsExist == true or $errEmailIsExist == true)
+    {
+      echo '
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Chyba!</strong> Jméno nebo email jsou již používány!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+        </div>';
+        
+        $errUserIsExist = false;
+        $_SESSION['errUserIsExist'] = $errUserIsExist;
+        $errEmailIsExist = false;
+        $_SESSION['errEmailIsExist'] = $errEmailIsExist;
+    }
     ?>
 
 
