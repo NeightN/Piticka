@@ -25,6 +25,7 @@
     session_start();
     $errUserIsExist = $_SESSION['errUserIsExist'];
     $errEmailIsExist = $_SESSION['errEmailIsExist'];
+    $errPswdNotMatch = $_SESSION['errPswdNotMatch'];
     if($errUserIsExist == true or $errEmailIsExist == true)
     {
       echo '
@@ -38,6 +39,17 @@
         $_SESSION['errUserIsExist'] = $errUserIsExist;
         $errEmailIsExist = false;
         $_SESSION['errEmailIsExist'] = $errEmailIsExist;
+    }
+    if($errPswdNotMatch == true)
+    {
+      echo '
+        <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+        <strong>Chyba!</strong> Hesla se neshodují!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+        </div>';
+        $errPswdNotMatch = false;
+        $_SESSION['errPswdNotMatch'] = $errPswdNotMatch;
     }
     ?>
 
@@ -73,14 +85,14 @@
                             <!-- Password -->
                             <div class="mb-3">
                                 <label for="pswd" class="form-label">Heslo:</label>
-                                <input type="password" class="form-control" id="pwd1" placeholder="Heslo" name="pswd" required>
+                                <input type="password" class="form-control" id="pwd" placeholder="Heslo" name="pswd" required>
                                 <div class="valid-feedback">V pořádku.</div>
                                 <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
                             </div>
                             <!-- Check password -->
                             <div class="mb-3">
                                 <label for="repeat_pswd" class="form-label">Znovu heslo:</label>
-                                <input type="password" class="form-control" id="pwd2" placeholder="Heslo" name="repeat_pswd" required>
+                                <input type="password" class="form-control" id="repeat_pswd" placeholder="Heslo" name="repeat_pswd" required>
                                 <div class="valid-feedback">V pořádku.</div>
                                 <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
                             </div>
@@ -115,7 +127,7 @@
                             <!-- Password -->
                             <div class="mb-3">
                                 <label for="pwd2" class="form-label">Heslo:</label>
-                                <input type="password" class="form-control" id="pwd2" placeholder="Heslo" name="pswd" required>
+                                <input type="password" class="form-control" id="pwd2" placeholder="Heslo" name="pswd2" required>
                                 <div class="valid-feedback">V pořádku.</div>
                                 <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
                             </div>

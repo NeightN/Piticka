@@ -91,14 +91,18 @@ if (trim($_POST["mail"]) !== "") {
     }
 }
 
-
+//kontrola hesel
 if (trim($_POST["pswd"]) !== "") {
     $password = trim($_POST["pswd"]);
 }
 
+//kontrola hesla
 if (trim($_POST["repeat_pswd"]) !== "") {
     $repeat_pswd = trim($_POST["repeat_pswd"]);
+}
 
+//kontrola shody hesel a zápis do databáze
+if ($password == $repeat_pswd) {
     $sql = "INSERT INTO people (name, email, password, admin) VALUES (?, ?, ?, 0)";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("sss", $param_username, $param_mail, $param_pswd);
@@ -116,7 +120,17 @@ if (trim($_POST["repeat_pswd"]) !== "") {
         $stmt->close();
     }
 }
+else{
+    //--------------------
+    session_start();
+    $errPswdNotMatch = true;
+    $_SESSION['errPswdNotMatch'] = $errPswdNotMatch;
+    //--------------------
+    header("location: ../index.php");
+    die();
+}
 $conn->close();
 }
+
 
 ?>
