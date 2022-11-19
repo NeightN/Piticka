@@ -45,8 +45,7 @@ if (trim($_POST["uname"]) !== "") {
             if ($stmt->num_rows() >= 1) {
                 //--------------------
                 session_start();
-                $errUserIsExist = true;
-                $_SESSION['errUserIsExist'] = $errUserIsExist;
+                $_SESSION['errUserIsExist'] = true;
                 //--------------------
                 header("location: ../index.php");
                 die();
@@ -75,8 +74,7 @@ if (trim($_POST["mail"]) !== "") {
             if ($stmt->num_rows() >= 1) {
                 //--------------------
                 session_start();
-                $errEmailIsExist = true;
-                $_SESSION['errEmailIsExist'] = $errEmailIsExist;
+                $_SESSION['errEmailIsExist'] = true;
                 //--------------------
                 header("location: ../index.php");
                 die();
@@ -102,7 +100,7 @@ if (trim($_POST["repeat_pswd"]) !== "") {
 }
 
 //kontrola shody hesel a zápis do databáze
-if ($password == $repeat_pswd) {
+if ($password === $repeat_pswd) {
     $sql = "INSERT INTO people (name, email, password, admin) VALUES (?, ?, ?, 0)";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("sss", $param_username, $param_mail, $param_pswd);
@@ -113,7 +111,7 @@ if ($password == $repeat_pswd) {
         
 
         if ($stmt->execute()) {
-            header("location: ../index.php");
+            header("location: ../autorization_tx_mail.php");
         } else {
             echo "Something went wrong.";
         }
@@ -123,8 +121,7 @@ if ($password == $repeat_pswd) {
 else{
     //--------------------
     session_start();
-    $errPswdNotMatch = true;
-    $_SESSION['errPswdNotMatch'] = $errPswdNotMatch;
+    $_SESSION['errPswdNotMatch'] = true;
     //--------------------
     header("location: ../index.php");
     die();

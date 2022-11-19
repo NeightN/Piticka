@@ -16,17 +16,10 @@
 <body id="color-button">
 
     <?php
-    /*
-        if($_POST['alert'])
-        {
-            alert($_POST['alert']);
-        }
-    */
+
     session_start();
-    $errUserIsExist = $_SESSION['errUserIsExist'];
-    $errEmailIsExist = $_SESSION['errEmailIsExist'];
-    $errPswdNotMatch = $_SESSION['errPswdNotMatch'];
-    if($errUserIsExist == true or $errEmailIsExist == true)
+
+    if($_SESSION['errUserIsExist'] == true or $_SESSION['errEmailIsExist'] == true)
     {
       echo '
         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
@@ -34,13 +27,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 </button>
         </div>';
-        
-        $errUserIsExist = false;
-        $_SESSION['errUserIsExist'] = $errUserIsExist;
-        $errEmailIsExist = false;
-        $_SESSION['errEmailIsExist'] = $errEmailIsExist;
+        $_SESSION['errUserIsExist'] = false;
+        $_SESSION['errEmailIsExist'] = false;
     }
-    if($errPswdNotMatch == true)
+    if($_SESSION['errPswdNotMatch'] == true)
     {
       echo '
         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
@@ -48,8 +38,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 </button>
         </div>';
-        $errPswdNotMatch = false;
-        $_SESSION['errPswdNotMatch'] = $errPswdNotMatch;
+        $_SESSION['errPswdNotMatch'] = false;
+    }
+
+    if($_SESSION['errNameOrPswd'] == true)
+    {
+      echo '
+        <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+        <strong>Chyba!</strong> Jméno nebo heslo není správné!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+        </div>';
+        $_SESSION['errNameOrPswd'] = false;
     }
     ?>
 
@@ -57,108 +57,7 @@
     <div id="color-text">
         <div id="form-radius">
             <!-- Header -->
-            <header>
-                <!-- Sign up -->
-                <div class="offcanvas offcanvas-end bg-dark text-white" id="signup">
-                    <div class="offcanvas-header">
-                        <h1 class="offcanvas-title">Vytvořit účet</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                    </div>
-
-                    <div class="offcanvas-body">
-                    <!--echo htmlspecialchars($_SERVER["PHP_SELF"]); -->
-                        <form action="user/register.php" method="POST" class="was-validated">
-                            <!-- Name -->
-                            <div class="mb-3 mt-3">
-                                <label for="uname" class="form-label">Jméno:</label>
-                                <input type="text" class="form-control" id="uname1" placeholder="Jméno" name="uname" required>
-                                <div class="valid-feedback">V pořádku.</div>
-                                <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
-                            </div>
-                            <!-- E-mail -->
-                            <div class="mb-3">
-                                <label for="mail" class="form-label">E-mail:</label>
-                                <input type="email" class="form-control" id="mail" placeholder="E-mail" name="mail" required>
-                                <div class="valid-feedback">V pořádku.</div>
-                                <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
-                            </div>
-                            <!-- Password -->
-                            <div class="mb-3">
-                                <label for="pswd" class="form-label">Heslo:</label>
-                                <input type="password" class="form-control" id="pwd" placeholder="Heslo" name="pswd" required>
-                                <div class="valid-feedback">V pořádku.</div>
-                                <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
-                            </div>
-                            <!-- Check password -->
-                            <div class="mb-3">
-                                <label for="repeat_pswd" class="form-label">Znovu heslo:</label>
-                                <input type="password" class="form-control" id="repeat_pswd" placeholder="Heslo" name="repeat_pswd" required>
-                                <div class="valid-feedback">V pořádku.</div>
-                                <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
-                            </div>
-                            <!-- Validation -->
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" id="myCheck" name="remember" required>
-                                <label class="form-check-label" for="myCheck"><em>Přijímám podmínky Homura</em></label>
-                                <div class="valid-feedback">V pořádku.</div>
-                                <div class="invalid-feedback">Zaškrtněte toto políčko pro pokračování.</div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Potvrdit</button>
-                        </form>
-                    </div>
-                </div>
-
-
-                <!-- Log in -->
-                <div class="offcanvas offcanvas-end bg-dark text-white" id="login">
-                    <div class="offcanvas-header">
-                        <h1 class="offcanvas-title">Přihlásit se</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <form action="user/login.php" method="POST" class="was-validated">
-                            <!-- Name -->
-                            <div class="mb-3 mt-3">
-                                <label for="uname2" class="form-label">Jméno:</label>
-                                <input type="text" class="form-control" id="uname2" placeholder="Jméno" name="uname" required>
-                                <div class="valid-feedback">V pořádku.</div>
-                                <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
-                            </div>
-                            <!-- Password -->
-                            <div class="mb-3">
-                                <label for="pwd2" class="form-label">Heslo:</label>
-                                <input type="password" class="form-control" id="pwd2" placeholder="Heslo" name="pswd2" required>
-                                <div class="valid-feedback">V pořádku.</div>
-                                <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Potvrdit</button>
-                        </form>
-                    </div>
-                </div>
-
-                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                    <div class="container-fluid">
-                        <!-- Logo -->
-                        <a class="navbar-brand" href="#">Homura</a>
-
-                        <!-- Buttons for "sign up" and "log in" -->
-                        <div>
-                            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#signup">
-                                Sign up
-                            </button>
-                            <button class="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#login">
-                                Log in
-                            </button>
-                        </div>
-                    </div>
-                </nav>
-                <!-- Header background -->
-                <div class="wide">
-                    <div class="col-sm-12">
-                    </div>
-                </div>
-
-            </header>
+            <?php include("headers/header_not_logged.php"); ?>
 
             <!-- Navigation -->
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
