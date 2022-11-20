@@ -1,6 +1,7 @@
 <?php
 
 include("../inc/connection.php");
+
 //use PHPMailer\PHPMailer\PHPMailer;
 //use PHPMailer\PHPMailer\Exception;
 //require 'path/to/PHPMailer/src/Exception.php';
@@ -10,19 +11,19 @@ include("../inc/connection.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // collect value of input field
   $name = $_POST['uname'];
-  $mail = $_POST['mail'];
+  $userAddress = $_POST['mail'];
   $pswd = $_POST['pswd'];
   $repeat_pswd = $_POST['repeat_pswd'];
 
   $name = strip_tags($name);
-  $mail = strip_tags($mail);
+  $userAddress = strip_tags($userAddress);
   $pswd = strip_tags($pswd);
   $repeat_pswd = strip_tags($repeat_pswd);
 
   // SQL Email Checko
 /*
   $stmt = $con->prepare("SELECT email from people where email = ':name'");
-  $stmt->bindParam(":name", $mail);
+  $stmt->bindParam(":name", $userAddress);
   $stmt->execute();
   if($stmt->rowCount() > 0)
   {
@@ -79,7 +80,7 @@ if (trim($_POST["mail"]) !== "") {
                 header("location: ../index.php");
                 die();
             } else {
-                $mail = trim($_POST["mail"]);
+                $userAddress = trim($_POST["mail"]);
             }
         } else {
             echo "Something went wrong.";
@@ -106,12 +107,37 @@ if ($password === $repeat_pswd) {
         $stmt->bind_param("sss", $param_username, $param_mail, $param_pswd);
 
         $param_username = $name;
-        $param_mail = $mail;
+        $param_mail = $userAddress;
         $param_pswd = password_hash($pswd, PASSWORD_DEFAULT);
         
 
         if ($stmt->execute()) {
-            header("location: ../autorization_tx_mail.php");
+            // All ok
+
+            // SEND MAIL
+
+            
+            $mail->From = "no-reply@scp-isolation.com";
+            $mail->FromName = "Piticker";
+
+            $mail->addAddress($userAddress, $username);
+
+            $mail->isHTML(true);
+
+            $mail->Subject = "CS! Piticker!";
+            $mail->Body = "<i>AAAAAAAAAAAAAAAAAAAAAAA</i>";
+            $mail->AltBody = "BBBBBBRRR NO HTML";
+
+            try {
+                $mail->send();
+                echo "Message has been sent successfully";
+
+                header("location: ../autorization_tx_mail.php");
+
+            } catch (Exception $e) {
+                echo "Mailer Error: " . $mail->ErrorInfo;
+            }
+        
         } else {
             echo "Something went wrong.";
         }
@@ -126,6 +152,9 @@ else{
     header("location: ../index.php");
     die();
 }
+
+
+
 $conn->close();
 }
 

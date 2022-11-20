@@ -16,8 +16,49 @@
 <body id="color-button">
 
     <?php
+    include("inc/connection.php");
 
     session_start();
+
+
+        // SEND MAIL
+
+
+        
+        $mail->From = "no-reply@scp-isolation.com";
+        $mail->FromName = "Piticker";
+
+        $mail->addAddress("prokop.svacina@gmail.com", "Prokop");
+
+        $mail->isHTML(true);
+
+        $mail->Subject = "CS! Piticker!";
+        $mail->Body = "<i>AAAAAAAAAAAAAAAAAAAAAAA</i>";
+        $mail->AltBody = "BBBBBBRRR NO HTML";
+
+        try {
+            $mail->send();
+            echo "Message has been sent successfully";
+
+            header("location: ../autorization_tx_mail.php");
+
+        } catch (Exception $e) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     if($_SESSION['errUserIsExist'] == true or $_SESSION['errEmailIsExist'] == true)
     {
