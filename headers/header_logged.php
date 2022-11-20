@@ -7,7 +7,10 @@
 
             <!-- Buttons for "sign up" and "log in" -->
             <div>
-                <button href="user/logout.php" class="btn btn-secondary" type="button">
+                <a class="" href="user/logout.php" title="Domů">
+                    Log out
+                </a>
+                <button href="index.php" class="btn btn-secondary" type="button">
                     Log out
                 </button>
             </div>

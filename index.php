@@ -23,8 +23,7 @@
 
         // SEND MAIL
 
-
-        
+        /*
         $mail->From = "no-reply@scp-isolation.com";
         $mail->FromName = "Piticker";
 
@@ -44,23 +43,11 @@
 
         } catch (Exception $e) {
             echo "Mailer Error: " . $mail->ErrorInfo;
-        }
+        }*/
+        
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    if($_SESSION['errUserIsExist'] == true or $_SESSION['errEmailIsExist'] == true)
+    if(isset($_SESSION['errUserIsExist']) == true or isset($_SESSION['errEmailIsExist']) == true)
     {
       echo '
         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
@@ -71,7 +58,7 @@
         $_SESSION['errUserIsExist'] = false;
         $_SESSION['errEmailIsExist'] = false;
     }
-    if($_SESSION['errPswdNotMatch'] == true)
+    if(isset($_SESSION['errPswdNotMatch']) == true)
     {
       echo '
         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
@@ -82,7 +69,7 @@
         $_SESSION['errPswdNotMatch'] = false;
     }
 
-    if($_SESSION['errNameOrPswd'] == true)
+    if(isset($_SESSION['errNameOrPswd']) == true)
     {
       echo '
         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
