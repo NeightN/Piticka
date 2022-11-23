@@ -66,12 +66,21 @@ ul.markers {
   border: rgba(126, 126, 126, 0.932);
 }
 
+
 #form-radius .btn {
   border-radius: 0%;
 }
 
 #form-radius .form-control {
   border-radius: 0%;
+}
+
+#pfp_btn .pfp_btn .btn{
+
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 
 #color-text p {
