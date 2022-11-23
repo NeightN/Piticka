@@ -43,6 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                 }
             }
+            else{
+                session_start();
+                $_SESSION['errNameOrPswd'] = true;
+                header("location: ../index.php");
+                die();
+            }
             $stmt->close();
         }
     }
