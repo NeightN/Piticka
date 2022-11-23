@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION["logged"] = true;
                         $_SESSION["ID"] = $id;
                         $_SESSION["uname"] = $username;
+
                         header("location: ../index2.php");
                     } else{
                         session_start();

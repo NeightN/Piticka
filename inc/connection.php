@@ -1,5 +1,5 @@
 <?php
-
+/*
 set_include_path('inc\\');
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once 'Mailer\Exception.php';
 require_once 'Mailer\PHPMailer.php';
 require_once 'Mailer\SMTP.php';
-
+*/
 
 // SQL 
 
@@ -31,7 +31,7 @@ if ($conn->connect_error) {
 // Mailer (Local config, do not enable TLS or change IP unless deplyed)
 
 
-
+/*
 $mail = new PHPMailer(true);
 
 //Enable SMTP debugging.
@@ -39,7 +39,7 @@ $mail->SMTPDebug = 3;
 //Set PHPMailer to use SMTP.
 $mail->isSMTP();
 //Set SMTP host name                          
-$mail->Host = "10.0.0.56";
+$mail->Host = "scp-isolation.com";
 //Set this to true if SMTP host requires authentication to send email
 $mail->SMTPAuth = true;                          
 //Provide username and password     
@@ -56,7 +56,7 @@ $mail->SMTPAutoTLS = false;
 
 //Set TCP port to connect to
 $mail->Port = 25;              
-
+*/
 
 
 

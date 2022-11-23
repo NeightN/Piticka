@@ -38,13 +38,13 @@
         try {
             $mail->send();
             echo "Message has been sent successfully";
-
+        
             header("location: ../autorization_tx_mail.php");
 
         } catch (Exception $e) {
             echo "Mailer Error: " . $mail->ErrorInfo;
-        }*/
-        
+        }
+        */
 
 
     if(isset($_SESSION['errUserIsExist']) == true or isset($_SESSION['errEmailIsExist']) == true)
