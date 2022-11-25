@@ -24,6 +24,9 @@
                 <th>Dávka</th>
                 <th>Celkem k úhradě</th>
             </tr>";
+
+    $array_celkem_cena = array();
+    $array_celkem_pocet = array();
     while ($row = mysqli_fetch_array($result)) {
         echo "<tr>";
         echo "<td>" . $row['typ'] . "</td>";
@@ -32,8 +35,12 @@
         $davka = $row["davky"];
         $pocet = $row["pocet"];
         $celkem = $davka * $pocet * 300;
+        $array_celkem_pocet[] = $pocet;
+        $array_celkem_cena[] = $celkem;
         echo "<td>" . $celkem . " Kč</td>";
     }
+    echo "<tr><td>Vše</td><td>". array_sum($array_celkem_pocet) ."</td><td></td><td>". array_sum($array_celkem_cena) ." Kč</td></tr>";
+    print $array_celkem_cena;
     echo "</table>";
     mysqli_close($conn);
     ?>
