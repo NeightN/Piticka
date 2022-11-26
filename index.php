@@ -13,17 +13,13 @@
 
 </head>
 
-<body id="color-button">
-
+<body>
     <?php
     include("inc/connection.php");
-
     session_start();
+    // SEND MAIL
 
-
-        // SEND MAIL
-
-        /*
+    /*
         $mail->From = "no-reply@scp-isolation.com";
         $mail->FromName = "Piticker";
 
@@ -46,10 +42,8 @@
         }
         */
 
-
-    if(isset($_SESSION['errUserIsExist']) == true or isset($_SESSION['errEmailIsExist']) == true)
-    {
-      echo '
+    if (isset($_SESSION['errUserIsExist']) == true or isset($_SESSION['errEmailIsExist']) == true) {
+        echo '
         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
         <strong>Chyba!</strong> Jméno nebo email jsou již používány!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -58,9 +52,8 @@
         $_SESSION['errUserIsExist'] = false;
         $_SESSION['errEmailIsExist'] = false;
     }
-    if(isset($_SESSION['errPswdNotMatch']) == true)
-    {
-      echo '
+    if (isset($_SESSION['errPswdNotMatch']) == true) {
+        echo '
         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
         <strong>Chyba!</strong> Hesla se neshodují!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -69,9 +62,8 @@
         $_SESSION['errPswdNotMatch'] = false;
     }
 
-    if(isset($_SESSION['errNameOrPswd']) == true)
-    {
-      echo '
+    if (isset($_SESSION['errNameOrPswd']) == true) {
+        echo '
         <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
         <strong>Chyba!</strong> Jméno nebo heslo není správné!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -81,175 +73,36 @@
     }
     ?>
 
-
     <div id="color-text">
         <div id="form-radius">
             <!-- Header -->
             <?php include("headers/header_not_logged.php"); ?>
 
-            <!-- Navigation -->
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <!-- Buttons with icons and search bar -->
-                    <div class="collapse navbar-collapse" id="mynavbar">
-
-                        <ul class="navbar-nav me-auto" id="navIcons">
-                            <!-- Button for "Home"/"index.php" -->
-                            <li class="nav-item">
-                                <a class="nav-link active" href="index.php" title="Domů">
-                                    Domů
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- Search bar -->
-                        <div id="search-icon">
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="text" placeholder="Search">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </nav>
-
             <!-- Main -->
-            <main class="main-height background-main">
-
-                <!-- Přehledný výpis toho, co který člověk vypil.  -->
-                <?php
-                include("inc/connection.php"); //pripojeni k databazi
-                $sql = "select people.name, types.typ, count(drinks.ID) as pocet
-                from drinks inner join people on drinks.id_people = people.ID 
-                left join types on drinks.id_types = types.ID
-                group by people.name, types.typ;";
-                $result = $conn->query($sql); //fetch data from db to result
-                ?>
-                <div class="container p-5 my-4 bg-dark">
-
-                    <h1>Výpis vypitých pitíček:</h1>
-                    <table class="table table-dark table-hover">
-                        <tr>
-                            <th>Jméno osoby</th>
-                            <th>Typ pitíčka</th>
-                            <th>Počet pitíček</th>
-                        </tr>
-                        <?php
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                        ?>
-                                <tr>
-                                    <td><?php echo $row["name"]; ?></td>
-                                    <td><?php echo $row["typ"]; ?></td>
-                                    <td><?php echo $row["pocet"]; ?></td>
-                                </tr>
-                        <?php
-                            } //konec while
-                        }  //konec podminky if
-                        else {
-                            echo "0 results";
-                        }
-                        ?>
-                    </table>
-                    <?php $conn->close(); ?>
-                </div>
-                <!----------------------------------------------------------------->
-                <script>
-                    function showUser(str) {
-                        if (str == "") {
-                            document.getElementById("txtHint").innerHTML = "";
-                            return;
-                        }
-                        var xmlhttp = new XMLHttpRequest();
-                        xmlhttp.onreadystatechange = function() {
-                            if (this.readyState == 4 && this.status == 200) {
-                                document.getElementById("txtHint").innerHTML = this.responseText;
-                            }
-                        }
-                        xmlhttp.open("GET", "getDrinksM.php?q=" + str, true);
-                        xmlhttp.send();
-                    }
-                </script>
-                <form>
-                    <?php
-                    include("inc/connection.php"); //pripojeni k databazi
-
-                    $sql = "select ID, name from people"; //select
-                    $result = $conn->query($sql); //fetch data from db to result
-
-                    $person = "<select class='dropdownForPeople' name='users' onchange='showUser(this.value)'>"; //zacatek dropdownl listu (select-option)
-                    if ($result->num_rows > 0) //kontrola zda jsme neco nacetli
-                    {
-                        while ($row = $result->fetch_assoc()) {
-                            $person .= "<option value='" . $row["ID"] . "'>" . $row["name"] . "</option>";
-                        }
-                    } else {
-                        echo "0 result";
-                    }
-                    $person .= "</select>";
-                    $conn->close(); //uzavreni pripojeni    
-                    ?>
-                </form>
-                <br>
-                <div class='container p-5 bg-dark'>
-                    <h1>Výpis dle měsíců:</h1>
-                    <?php echo $person; ?>
-                    <div id="txtHint"><b>Person info will be listed here.</b></div>
-                </div>
-                <!----------------------------------------------------------------->
-                <script>
-                    function showTypes(str) {
-                        if (str == "") {
-                            document.getElementById("txtHint2").innerHTML = "";
-                            return;
-                        }
-                        var xmlhttp = new XMLHttpRequest();
-                        xmlhttp.onreadystatechange = function() {
-                            if (this.readyState == 4 && this.status == 200) {
-                                document.getElementById("txtHint2").innerHTML = this.responseText;
-                            }
-                        }
-                        xmlhttp.open("GET", "getDrinksP.php?q=" + str, true);
-                        xmlhttp.send();
-                    }
-                </script>
-
-                <?php
-                include("inc/connection.php"); //pripojeni k databazi
-
-                $sql = "select ID, name from people"; //select
-                $result = $conn->query($sql); //fetch data from db to result
-
-                $person = "<select class='dropdownForPeople' name='users' onchange='showTypes(this.value)'>"; //zacatek dropdownl listu (select-option)
-                if ($result->num_rows > 0) //kontrola zda jsme neco nacetli
-                {
-                    while ($row = $result->fetch_assoc()) {
-                        $person .= "<option value='" . $row["ID"] . "'>" . $row["name"] . "</option>";
-                    }
-                } else {
-                    echo "0 result";
-                }
-                $person .= "</select>";
-                $conn->close(); //uzavreni pripojeni    
-                ?>
-
-                <div class="container p-5 my-5 bg-dark">
-                    <form>
-                        <!-- Přehledný výpis toho, co který člověk vypil.  -->
-                        <h1>Výpis kolik za nápoj zaplatí:</h1>
-                        <?php echo $person; ?>
-                        <div id="txtHint2"><b>Person info will be listed here.</b></div>
-                    </form>
+            <main>
+                <div class="area">
+                    <ul class="circles">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <!-- 
+                    <img class="svg_animation filter-default" src="img/bean.svg" alt="Bean" />
+                    <img class="svg_animation" src="img/bean.svg" alt="Bean" />
+                    <img class="svg_animation" src="img/bean.svg" alt="Bean" />
+                    <img class="svg_animation" src="img/bean.svg" alt="Bean" />
+                    <img class="svg_animation" src="img/bean.svg" alt="Bean" />
+                    <img class="svg_animation" src="img/bean.svg" alt="Bean" />
+                    -->
+                    </ul>
                 </div>
             </main>
-
-
             <!-- Footer -->
             <footer class="footer-height bg-dark navbar-dark">
                 <div class="container-fluid row" id="list-s-t">
@@ -304,9 +157,7 @@
                         </ul>
                     </div>
                 </div>
-
             </footer>
-
         </div>
     </div>
 </body>

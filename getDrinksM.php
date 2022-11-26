@@ -18,7 +18,7 @@
     group by people.name, types.typ, month(date);";
 
     $result = mysqli_query($conn, $sql);
-    echo "<table class='table table-dark table-hover'>
+    echo "<table class='accordion-body m-0 table table-hover'>
             <tr>
                 <th>Typ</th>
                 <th>Počet</th>

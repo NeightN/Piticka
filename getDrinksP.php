@@ -17,7 +17,7 @@
     group by people.name, types.typ;";
 
     $result = mysqli_query($conn, $sql);
-    echo "<table class='table table-dark table-hover'>
+    echo "<table class='accordion-body m-0 table table-hover'>
             <tr>
                 <th>Typ pitíčka</th>
                 <th>Počet pitíček</th>
@@ -40,7 +40,6 @@
         echo "<td>" . $celkem . " Kč</td>";
     }
     echo "<tr><td>Vše</td><td>". array_sum($array_celkem_pocet) ."</td><td></td><td>". array_sum($array_celkem_cena) ." Kč</td></tr>";
-    print $array_celkem_cena;
     echo "</table>";
     mysqli_close($conn);
     ?>
