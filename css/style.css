@@ -79,11 +79,11 @@ ul.markers {
 }
 
 #color-text tr {
-  color: #00BFFF;
+  color: #854442;
 }
 
 #navIcons .nav-link.active {
-  background-color: rgb(57, 86, 167);
+  background-color: #9b7e64;
 }
 
 #color-text .nav-link {
@@ -98,12 +98,8 @@ ul.markers {
   list-style-type: none !important;
 }
 
-.offcanvas-title {
-  color: #056fc7;
-}
-
 .form-label {
-  color: #00BFFF;
+  color: #DFCCAF;
 }
 
 div.default_svg img {
@@ -123,6 +119,18 @@ div.default_svg img {
   animation: Gradient 15s ease infinite;
   position: relative;
   height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0px;
+}
+
+.background2 {
+  background: linear-gradient(132deg, #DFCCAF, #854442, #BE9B7B);
+  background-size: 400% 400%;
+  animation: Gradient 15s ease infinite;
+  position: relative;
+  height: auto;
   width: 100%;
   overflow: hidden;
   padding: 0;
@@ -246,4 +254,8 @@ div.default_svg img {
 
 .text-pale-taupe {
   color: #BE9B7B !important;
+}
+
+.border-accordin-own {
+  border-bottom: 1px solid #DFCCAF !important;
 }

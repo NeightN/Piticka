@@ -1,13 +1,13 @@
 <!-- Header -->
 <header>
     <!-- Sign up -->
-    <div class="offcanvas offcanvas-end bg-dark text-white" id="signup">
+    <div class="offcanvas offcanvas-end bg-dark-coffee text-white" id="signup">
         <div class="offcanvas-header">
             <h1 class="offcanvas-title">Vytvořit účet</h1>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
 
-        <div class="offcanvas-body">
+        <div class="offcanvas-body text-desert-sand">
             <form action="user/register.php" method="POST" class="was-validated">
                 <!-- Name -->
                 <div class="mb-3 mt-3">
@@ -44,19 +44,19 @@
                     <div class="valid-feedback">V pořádku.</div>
                     <div class="invalid-feedback">Zaškrtněte toto políčko pro pokračování.</div>
                 </div>
-                <button type="submit" class="btn btn-primary">Potvrdit</button>
+                <button type="submit" class="btn bg-pale-taupe">Potvrdit</button>
             </form>
         </div>
     </div>
 
 
     <!-- Log in -->
-    <div class="offcanvas offcanvas-end bg-dark text-white" id="login">
+    <div class="offcanvas offcanvas-end bg-dark-coffee text-white" id="login">
         <div class="offcanvas-header">
             <h1 class="offcanvas-title">Přihlásit se</h1>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body text-desert-sand">
             <form action="user/login.php" method="POST" class="was-validated">
                 <!-- Name -->
                 <div class="mb-3 mt-3">
@@ -72,7 +72,7 @@
                     <div class="valid-feedback">V pořádku.</div>
                     <div class="invalid-feedback">Vyplňte prosím toto pole.</div>
                 </div>
-                <button type="submit" class="btn btn-primary">Potvrdit</button>
+                <button type="submit" class="btn bg-pale-taupe">Potvrdit</button>
             </form>
         </div>
     </div>
