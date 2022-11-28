@@ -1,6 +1,6 @@
 <!-- Header -->
 <header>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark-coffee navbar-dark">
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="#">Homura</a>

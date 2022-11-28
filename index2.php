@@ -27,7 +27,7 @@ if (isset($_SESSION['admin']) != null) {
 <body id="color-button">
 
     <div id="color-text">
-        <div id="form-radius">
+        <div>
             <!-- Header -->
             <?php include("headers/header_logged.php"); ?>
 

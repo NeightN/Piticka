@@ -1,7 +1,7 @@
 .wide {
   width: 100%;
   height: 300px;
-  background-image: url('https://cdn.pixabay.com/photo/2016/08/03/09/03/universe-1566159_960_720.jpg');
+  background-image: url('../img/texture-coffee-beans.jpg');
   background-size: cover;
 }
 
@@ -11,16 +11,6 @@
 
 .footer-height {
   padding: 5%;
-}
-
-.background-main {
-  background-color: rgb(48, 54, 61);
-  padding-bottom: 1px;
-  padding-top: 1px;
-}
-
-.background-body {
-  background-color: rgb(48, 54, 61);
 }
 
 ul.markers {
@@ -40,7 +30,6 @@ ul.markers {
 }
 
 #navIcons i {
-  color: #00BFFF;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 0px;
@@ -51,6 +40,7 @@ ul.markers {
   color: white;
 }
 
+/***********************/
 #color-button .btn-primary:hover {
   background-color: #056fc7;
   border: #056fc7;
@@ -66,33 +56,22 @@ ul.markers {
   border: rgba(126, 126, 126, 0.932);
 }
 
+/***********************/
 
-#form-radius .btn {
-  border-radius: 0%;
+
+.btn {
+  border-radius: 0% !important;
 }
 
-#form-radius .form-control {
-  border-radius: 0%;
+.form-control {
+  border-radius: 0% !important;
 }
 
-#pfp_btn .pfp_btn .btn{
-
+.pfp_btn .btn {
   padding-left: 20px !important;
   padding-right: 20px !important;
   padding-top: 0px !important;
   padding-bottom: 0px !important;
-}
-
-#color-text p {
-  color: #00BFFF;
-}
-
-#color-text h1 {
-  color: #056fc7;
-}
-
-#color-text h3 {
-  color: #056fc7;
 }
 
 #color-text ul {
@@ -108,22 +87,22 @@ ul.markers {
 }
 
 #color-text .nav-link {
-  color: #00BFFF;
+  color: #DFCCAF !important;
 }
 
 #color-text .nav-link:hover {
-  color: #056fc7;
+  color: #BE9B7B !important;
 }
 
 #list-s-t li {
-  list-style-type: none;
+  list-style-type: none !important;
 }
 
-#color-text .offcanvas-title {
+.offcanvas-title {
   color: #056fc7;
 }
 
-#color-text .form-label {
+.form-label {
   color: #00BFFF;
 }
 
@@ -132,13 +111,11 @@ div.default_svg img {
   width: 100px;
 }
 
+/* https://codepen.io/sosuke/pen/Pjoqqp */
 .filter-default {
   /* !!invert(0.5) sepia(1)!! */
   filter: invert(17%) sepia(5%) saturate(1722%) hue-rotate(314deg) brightness(98%) contrast(92%);
 }
-
-
-/* https://codepen.io/sosuke/pen/Pjoqqp */
 
 .background {
   background: linear-gradient(132deg, #DFCCAF, #854442, #BE9B7B);
@@ -203,30 +180,70 @@ div.default_svg img {
 /* Animate Background*/
 @keyframes Gradient {
   0% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 
   50% {
-      background-position: 100% 50%;
+    background-position: 100% 50%;
   }
 
   100% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }
 
 @keyframes svg_animation {
   0% {
-      transform: scale(0) rotate(0deg) translate(-50%, -50%) translateX(2px);
-      opacity: 0;
+    transform: scale(0) rotate(0deg) translate(-50%, -50%) translateX(2px);
+    opacity: 0;
   }
 
   50% {
-      opacity: 1;
+    opacity: 1;
   }
 
   100% {
-      transform: scale(20) rotate(960deg) translate(-50%, -50%) translateX(-2px);
-      opacity: 0;
+    transform: scale(20) rotate(960deg) translate(-50%, -50%) translateX(-2px);
+    opacity: 0;
   }
+}
+
+.bg-dark-coffee {
+  background-color: #3C2F2F !important;
+}
+
+.bg-brandy {
+  background-color: #854442 !important;
+}
+
+.bg-desert-sand {
+  background-color: #DFCCAF !important;
+}
+
+.bg-coffee {
+  background-color: #6F4436 !important;
+}
+
+.bg-pale-taupe {
+  background-color: #BE9B7B !important;
+}
+
+.text-dark-coffee {
+  color: #3C2F2F !important;
+}
+
+.text-brandy {
+  color: #854442 !important;
+}
+
+.text-desert-sand {
+  color: #DFCCAF !important;
+}
+
+.text-coffee {
+  color: #6F4436 !important;
+}
+
+.text-pale-taupe {
+  color: #BE9B7B !important;
 }

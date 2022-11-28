@@ -77,26 +77,20 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark-coffee navbar-dark">
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="#">Homura</a>
 
             <!-- Buttons for "sign up" and "log in" -->
             <div>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#signup">
+                <button class="btn bg-desert-sand text-dark-coffee" type="button" data-bs-toggle="offcanvas" data-bs-target="#signup">
                     Sign up
                 </button>
-                <button class="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#login">
+                <button class="btn bg-pale-taupe text-dark-coffee" type="button" data-bs-toggle="offcanvas" data-bs-target="#login">
                     Log in
                 </button>
             </div>
         </div>
     </nav>
-    <!-- Header background -->
-    <div class="wide">
-        <div class="col-sm-12">
-        </div>
-    </div>
-
 </header>
