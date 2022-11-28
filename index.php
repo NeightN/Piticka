@@ -80,6 +80,15 @@
 
             <!-- Main -->
             <main>
+                <div class="background">
+                    <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                    <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                    <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                    <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                    <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                    <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                </div>
+                <!--
                 <div class="area">
                     <ul class="circles">
                         <li></li>
@@ -92,16 +101,17 @@
                         <li></li>
                         <li></li>
                         <li></li>
-                        <!-- 
+                        
                     <img class="svg_animation filter-default" src="img/bean.svg" alt="Bean" />
                     <img class="svg_animation" src="img/bean.svg" alt="Bean" />
                     <img class="svg_animation" src="img/bean.svg" alt="Bean" />
                     <img class="svg_animation" src="img/bean.svg" alt="Bean" />
                     <img class="svg_animation" src="img/bean.svg" alt="Bean" />
                     <img class="svg_animation" src="img/bean.svg" alt="Bean" />
-                    -->
+
                     </ul>
                 </div>
+                                    -->
             </main>
             <!-- Footer -->
             <footer class="footer-height bg-dark navbar-dark">
