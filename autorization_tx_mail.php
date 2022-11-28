@@ -1,9 +1,13 @@
+<?php
+include("../inc/connection.php");
+?>
+
 <!doctype html>
 <html lang="cz">
 
 <head>
     <meta charset="utf-8">
-    <title>Waiting</title>
+    <title>Verification</title>
     <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -16,25 +20,104 @@
 <body class="background-body mt-5">
     <!-- waiting for email autorization -->
     <div class="container position-relative">
-
         <div class="row d-flex justify-content-center">
             <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
                 <div class="card bg-dark bg-opacity-50 text-white">
                     <div class="card-body">
-                        <h5 class="card-title">Waiting for email autorization</h5>
-                        <p class="card-text">Please check your email and autorize your account.</p>
+
+                        <?php
+
+                        $headMessage = "";
+                        $contextMessage = "";
+
+
+                        if (isset($_GET['user']) and isset($_GET['key'])) {
+                            
+                            echo("AAAa");
+
+                            // SQL USER CHECK 
+                            $sql = "SELECT ID FROM people WHERE name = ?";
+                            
+                            if ($stmt = $conn->prepare($sql)) {
+                                $stmt->bind_param("s", $_POST["user"]);
+
+                                echo("AAasdA");
+                                
+                                if ($stmt->execute()) {
+                                    $stmt->store_result();
+
+                                    echo "Hello Exec!";
+
+                                    if ($stmt->num_rows() != 1) {
+                                        // Issue
+                                        echo "1 NOT OK";
+
+                                    } else {
+
+                                        // GOTO BELOW
+                                        echo "1 OK";
+                                    }
+                                } else {
+                                    echo "<h1>Something went wrong.</h1>";
+                                    die();
+                                }
+                                $stmt->close();
+                            } else
+                            {
+                                echo("Guhh?");
+                            }
+
+
+                            // SQL CODE
+                            $sql = "SELECT id FROM awaitingVerification WHERE ver_code = ?";
+
+                            if ($stmt = $conn->prepare($sql)) {
+                                $stmt->bind_param("s", trim($_POST["key"]));
+
+                                if ($stmt->execute()) {
+                                    $stmt->store_result();
+
+                                    if ($stmt->num_rows() != 1) {
+                                        // Issue
+                                        echo "2 NOT OK";
+
+                                    } else {
+
+                                        // GOTO BELOW
+                                        echo "2 OK";
+                                    }
+                                } else {
+                                    echo "<h1>Something went wrong.</h1>";
+                                    die();
+                                }
+                                $stmt->close();
+                            }
+
+
+
+                            // BELOW
+
+                            $headMessage = "Email verified";
+                            $contextMessage = "Thank you for verifying your account. You can now proceed to log in.";
+                        } else {
+
+                            $headMessage = "Awaiting confirmation";
+                            $contextMessage = "Account confirmation email has been sent to your address.";
+                        }
+
+
+
+                        ?>
+
+
+                        <h5 class="card-title"><?php echo $headMessage ?></h5>
+                        <p class="card-text"><?php echo $contextMessage ?></p>
 
                         <a href="index.php" class="btn btn-secondary">Go back</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="text-center text-white" style="margin-top: 100px;">
-            <div class="spinner-border" role="status" style="width: 20vw; height: 20vw; font-weight: 900;">
-                <b><span class="sr-only"></span></b>
-            </div>
-        </div>
-        
     </div>
 </body>
 
