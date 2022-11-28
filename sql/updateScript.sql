@@ -251,4 +251,11 @@ UPDATE `coffe_lmsoft_cz`.`people` SET `admin` = '0' WHERE (`ID` = '2');
 UPDATE `coffe_lmsoft_cz`.`people` SET `admin` = '0' WHERE (`ID` = '3');
 INSERT INTO `coffe_lmsoft_cz`.`people` (`name`, `email`, `password`, `admin`) VALUES ('coffemaster', 'prokop.svacina@gmail.com', '1234', '1');
 
+create table awaitingVerification 
+(
+    id int primary key AUTO_INCREMENT,
+    user_fk int not null,
+    ver_code varchar(64) ,
+    expiry datetime
+);
 
