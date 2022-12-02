@@ -13,86 +13,40 @@
 
 </head>
 
-<body>
-    <?php
-    include("inc/connection.php");
-    session_start();
-    // SEND MAIL
-
-    /*
-        $mail->From = "no-reply@scp-isolation.com";
-        $mail->FromName = "Piticker";
-
-        $mail->addAddress("prokop.svacina@gmail.com", "Prokop");
-
-        $mail->isHTML(true);
-
-        $mail->Subject = "CS! Piticker!";
-        $mail->Body = "<i>AAAAAAAAAAAAAAAAAAAAAAA</i>";
-        $mail->AltBody = "BBBBBBRRR NO HTML";
-
-        try {
-            $mail->send();
-            echo "Message has been sent successfully";
-        
-            header("location: ../autorization_tx_mail.php");
-
-        } catch (Exception $e) {
-            echo "Mailer Error: " . $mail->ErrorInfo;
-        }
-        */
-
-    if (isset($_SESSION['errUserIsExist']) == true or isset($_SESSION['errEmailIsExist']) == true) {
-        echo '
-        <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-        <strong>Chyba!</strong> Jméno nebo email jsou již používány!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                </button>
-        </div>';
-        $_SESSION['errUserIsExist'] = false;
-        $_SESSION['errEmailIsExist'] = false;
-    }
-    if (isset($_SESSION['errPswdNotMatch']) == true) {
-        echo '
-        <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-        <strong>Chyba!</strong> Hesla se neshodují!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                </button>
-        </div>';
-        $_SESSION['errPswdNotMatch'] = false;
-    }
-
-    if (isset($_SESSION['errNameOrPswd']) == true) {
-        echo '
-        <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-        <strong>Chyba!</strong> Jméno nebo heslo není správné!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                </button>
-        </div>';
-        $_SESSION['errNameOrPswd'] = false;
-    }
-    ?>
-
-    <div id="color-text">
-        <div id="form-radius">
+<body id="color-text">
+            
             <!-- Header -->
-            <?php include("headers/header_not_logged.php"); ?>
+            <?php 
+            session_start();
+            include("headers/header_not_logged.php"); 
+            ?>
 
-            <!-- Main -->
-            <main>
-                <div class="background" onmousedown='return false;' onselectstart='return false;'>
+            
+            <main class="background" onmousedown='return false;' onselectstart='return false;'>
+                    
+            
+                    <div class="container mt-2">
+                    <!-- CONTENT TADI!!!!!  -->
+                    
+                    <?php include("headers/notification.php") ?>
+
+                    </div>
+
+
+
+
+
+
                     <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
                     <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
                     <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
                     <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
                     <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
                     <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-                </div>
             </main>
             <!-- Footer -->
             <?php include("footer/footer.php") ?>
-        </div>
-    </div>
+
 </body>
 
 </html>
