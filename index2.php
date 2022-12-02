@@ -33,7 +33,7 @@ if (isset($_SESSION['admin']) != null) {
 
             <!-- Main -->
             <main class="main-height background-main">
-                <div class="background2" onmousedown='return false;' onselectstart='return false;'>
+                <div class="background2" >
                     <!-- Přehledný výpis toho, co který člověk vypil.  -->
                     <?php
                     include("inc/connection.php"); //pripojeni k databazi
