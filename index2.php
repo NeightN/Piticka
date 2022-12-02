@@ -109,9 +109,11 @@ if (isset($_SESSION['admin']) != null) {
                                         $sql = "select ID, name from people"; //select
                                         $result = $conn->query($sql); //fetch data from db to result
 
-                                        $person = "<select class='' name='users' onchange='showUser(this.value)'>"; //zacatek dropdownl listu (select-option)
+                                        $person = "<select class='form-select' aria-label='Default select example' name='users' onchange='showUser(this.value)'>"; //zacatek dropdownl listu (select-option)
+                                        $person.="<option selected>Zvolte uživatele:</option>";
                                         if ($result->num_rows > 0) //kontrola zda jsme neco nacetli
                                         {
+                                            
                                             while ($row = $result->fetch_assoc()) {
                                                 $person .= "<option value='" . $row["ID"] . "'>" . $row["name"] . "</option>";
                                             }
@@ -157,7 +159,8 @@ if (isset($_SESSION['admin']) != null) {
                                     $sql = "select ID, name from people"; //select
                                     $result = $conn->query($sql); //fetch data from db to result
 
-                                    $person = "<select class='dropdownForPeople' name='users' onchange='showTypes(this.value)'>"; //zacatek dropdownl listu (select-option)
+                                    $person = "<select class='form-select' aria-label='Default select example' name='users' onchange='showTypes(this.value)'>"; //zacatek dropdownl listu (select-option)
+                                    $person.="<option selected>Zvolte uživatele:</option>";
                                     if ($result->num_rows > 0) //kontrola zda jsme neco nacetli
                                     {
                                         while ($row = $result->fetch_assoc()) {

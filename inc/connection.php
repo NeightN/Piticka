@@ -17,7 +17,7 @@ require_once 'Mailer\SMTP.php';
 
 $servername = "localhost";
 $username = "root";
-$password = ""; //"student"
+$password = "student"; //"student"
 $db = "coffe_lmsoft_cz";
 
 
