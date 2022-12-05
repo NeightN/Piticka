@@ -1,9 +1,9 @@
 <!-- Header -->
-<header>
-    <nav class="navbar navbar-expand-sm bg-dark-coffee navbar-dark">
+<header class="sticky-top">
+    <nav class="navbar fixed-top bg-dark-coffee">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand" href="#">Homura</a>
+            <a class="navbar-brand text-white" href="#">Homura</a>
             <div class="d-flex align-items-center">
 
                 <div class="dropdown">

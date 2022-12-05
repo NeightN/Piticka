@@ -12,3 +12,4 @@ if (isset($_SESSION['err'])) {
         </div>';
         $_SESSION['err'] = null;
 }
+?>

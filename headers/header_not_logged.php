@@ -1,5 +1,5 @@
 <!-- Header -->
-<header>
+<header class="sticky-top">
     <!-- Sign up -->
     <div class="offcanvas offcanvas-end bg-dark-coffee text-white" id="signup">
         <div class="offcanvas-header">
