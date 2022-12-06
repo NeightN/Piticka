@@ -14,15 +14,16 @@
 
 </head>
 
-<body id="color-text">
+<body id="color-text" class="background-gradient">
+    <div id="wrapper">
+
+    <main class="background" onmousedown='return false;' onselectstart='return false;'>
 
     <!-- Header -->
     <?php
     session_start();
     include("headers/header_not_logged.php");
     ?>
-
-    <main class="background" onmousedown='return false;' onselectstart='return false;'>
 
         <div class="container mt-2">
             <!-- CONTENT TADI!!!!!  -->
@@ -31,25 +32,27 @@
 
         </div>
 
-
-
         <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
         <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
         <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-        <div class="horizontal-centred">
-            <h1 class="text-center">Piticka</h1>
-        </div>
         <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
         <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
         <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
 
     </main>
 
+    <div class="content">
+        <div class="d-flex justify-content-center align-items-baseline ">
+            <h1>Piticka</h1>
+        </div>
 
+    </div>
+            
+    
     <!-- Footer -->
     <?php include("footer/footer.php") ?>
-
-
+    </div>
+    
 </body>
 
 </html>

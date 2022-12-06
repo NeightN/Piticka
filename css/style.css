@@ -5,12 +5,30 @@
   background-size: cover;
 }
 
-.main-height .footer-height {
-  height: auto;
+html, body { 
+  min-height: 100% !important;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+.content {
+  /* Padding for footer here */
+  padding-bottom: 300px;
 }
 
 .footer-height {
-  padding: 5%;
+
+    height: 300px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
 }
 
 ul.markers {
@@ -114,15 +132,18 @@ div.default_svg img {
 }
 
 .background {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0px;
+}
+
+.background-gradient
+{
   background: linear-gradient(132deg, #DFCCAF, #854442, #BE9B7B);
   background-size: 400% 400%;
   animation: Gradient 15s ease infinite;
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  padding: 0;
-  margin: 0px;
 }
 
 .background2 {
