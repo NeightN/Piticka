@@ -18,10 +18,10 @@
                             <a class="dropdown-item" href="#">Settings</a>
                         </li>
                         <!-- admin -->
-                        <?php 
-                            if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
-                                echo '<li><a class="dropdown-item" href="admin.php">Admin</a></li>';
-                            }
+                        <?php
+                        if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+                            echo '<li><a class="dropdown-item" href="admin.php">Admin</a></li>';
+                        }
                         ?>
                         <li>
                             <a class="dropdown-item" href="user/logout.php">Logout</a>
@@ -30,11 +30,5 @@
                 </div>
             </div>
         </div>
-        </div>
     </nav>
-    <!-- Header background -->
-    <div class="wide">
-        <div class="col-sm-12">
-        </div>
-    </div>
 </header>

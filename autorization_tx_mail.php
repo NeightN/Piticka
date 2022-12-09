@@ -32,16 +32,12 @@ include("../inc/connection.php");
 
 
                         if (isset($_GET['user']) and isset($_GET['key'])) {
-                            
-                            echo("AAAa");
 
                             // SQL USER CHECK 
                             $sql = "SELECT ID FROM people WHERE name = ?";
                             
                             if ($stmt = $conn->prepare($sql)) {
                                 $stmt->bind_param("s", $_POST["user"]);
-
-                                echo("AAasdA");
                                 
                                 if ($stmt->execute()) {
                                     $stmt->store_result();
@@ -93,10 +89,7 @@ include("../inc/connection.php");
                                 $stmt->close();
                             }
 
-
-
                             // BELOW
-
                             $headMessage = "Email verified";
                             $contextMessage = "Thank you for verifying your account. You can now proceed to log in.";
                         } else {
@@ -104,8 +97,6 @@ include("../inc/connection.php");
                             $headMessage = "Awaiting confirmation";
                             $contextMessage = "Account confirmation email has been sent to your address.";
                         }
-
-
 
                         ?>
 

@@ -135,8 +135,6 @@ $mailee->AltBody = "<i>Generated at: </i>" . date("h:i:sa") . "<br> Verification
 try {
     $mailee->send();
 
-    echo "Message has been sent successfully";
-    header("location: ../autorization_tx_mail.php");
 } catch (Exception $e) {
 
     echo "Mailer Error: " . $mailee->ErrorInfo;
@@ -172,7 +170,6 @@ if ($stmt = $conn->prepare($sql)) {
 // IF SQL QUERY WENT FINE
 if ($stmt->execute()) {
 }
-
-
-
 $conn->close();
+
+header("location: ../autorization_tx_mail.php");
