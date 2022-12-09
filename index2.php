@@ -46,7 +46,7 @@ if (isset($_SESSION['admin']) != null) {
 
             <div class="content">
 
-                
+
 
                 <!-- Přehledný výpis toho, co který člověk vypil.  -->
                 <?php
@@ -194,6 +194,16 @@ if (isset($_SESSION['admin']) != null) {
                             </div>
                         </div>
                     </div>
+
+                    <!-- inputs  -->
+
+                    <form class="mt-5" action="" method="POST">
+                        <div class="input-group mb-3">
+                            <input placeholder="Napište, kolik jste toho vypil a čeho..." type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon1">Button</button>
+                        </div>
+                    </form>
+
                 </div>
                 <!-- Footer -->
                 <?php include("footer/footer.php") ?>
