@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["pswd2"]);
     }
 
-    $sql = "select ID, name, password from people where name = ?";
+    $sql = "select ID, name, password, admin from people where name = ?";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("s", $param_username);
         $param_username = $username;
@@ -26,13 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->store_result();
 
             if($stmt->num_rows() >= 1){
-                $stmt->bind_result($id, $username, $hashed_password);
+                $stmt->bind_result($id, $username, $hashed_password, $admin);
                 if($stmt->fetch()){
                     if(password_verify($password, $hashed_password)){
                         session_start();
                         $_SESSION["logged"] = true;
                         $_SESSION["ID"] = $id;
                         $_SESSION["uname"] = $username;
+                        $_SESSION["admin"] = $admin;
 
                         header("location: ../index2.php");
                     } else{
