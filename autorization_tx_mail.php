@@ -1,7 +1,3 @@
-<?php
-include("../inc/connection.php");
-?>
-
 <!doctype html>
 <html lang="cz">
 
@@ -18,6 +14,7 @@ include("../inc/connection.php");
 </head>
 
 <body class="background-body mt-5">
+
     <!-- waiting for email autorization -->
     <div class="container position-relative">
         <div class="row d-flex justify-content-center">
@@ -27,18 +24,48 @@ include("../inc/connection.php");
 
                         <?php
 
+include("../inc/connection.php");
+
+
                         $headMessage = "";
                         $contextMessage = "";
 
-
                         if (isset($_GET['user']) and isset($_GET['key'])) {
 
+                            $userName = $_GET["user"];
+                            $userPass = $_GET['key'];
+
+
+                            include("../inc/connection.php");
+
+                            $sql = "SELECT ID, name, email FROM people";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                // output data of each row
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "id: " . $row["ID"] . " - Name: " . $row["name"] . " " . $row["email"] . "<br>";
+                                }
+                            } else {
+                                echo "0 results";
+                            }
+                            $conn->close();
+
+
+
+
+
+                            echo ("Hello world.");
+
                             // SQL USER CHECK 
-                            $sql = "SELECT ID FROM people WHERE name = ?";
-                            
-                            if ($stmt = $conn->prepare($sql)) {
-                                $stmt->bind_param("s", $_POST["user"]);
-                                
+                            if ($stmt = $conn->prepare("select people.ID from people where name = ?")) {
+
+                                echo ("Hello world. 2");
+
+                                $stmt->bind_param("s", $userName);
+
+                                echo ("Hello world. 4");
+
                                 if ($stmt->execute()) {
                                     $stmt->store_result();
 
@@ -46,8 +73,7 @@ include("../inc/connection.php");
 
                                     if ($stmt->num_rows() != 1) {
                                         // Issue
-                                        echo "1 NOT OK";
-
+                                        $contextMessage = "Invalid key or username. Please check if you copied the link properly";
                                     } else {
 
                                         // GOTO BELOW
@@ -58,25 +84,25 @@ include("../inc/connection.php");
                                     die();
                                 }
                                 $stmt->close();
-                            } else
-                            {
-                                echo("Guhh?");
+                            } else {
+                                echo ("Guhh?");
                             }
 
+                            echo ("GSAIGDHIAUSGDIAUGSD ?");
 
                             // SQL CODE
                             $sql = "SELECT id FROM awaitingVerification WHERE ver_code = ?";
 
                             if ($stmt = $conn->prepare($sql)) {
-                                $stmt->bind_param("s", trim($_POST["key"]));
+                                $stmt->bind_param("s", trim($userPass));
 
                                 if ($stmt->execute()) {
                                     $stmt->store_result();
 
                                     if ($stmt->num_rows() != 1) {
                                         // Issue
-                                        echo "2 NOT OK";
 
+                                        $contextMessage = "Invalid key or username. Please check if you copied the link properly";
                                     } else {
 
                                         // GOTO BELOW
@@ -89,9 +115,12 @@ include("../inc/connection.php");
                                 $stmt->close();
                             }
 
-                            // BELOW
-                            $headMessage = "Email verified";
-                            $contextMessage = "Thank you for verifying your account. You can now proceed to log in.";
+                            // All above returned successfuly and user was authenticated.
+                            if ($headMessage == "") {
+                                // BELOW
+                                $headMessage = "Email verified";
+                                $contextMessage = "Thank you for verifying your account. You can now proceed to log in.";
+                            }
                         } else {
 
                             $headMessage = "Awaiting confirmation";

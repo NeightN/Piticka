@@ -44,6 +44,30 @@
     <div class="content">
         <div class="d-flex justify-content-center align-items-baseline ">
             <h1>Piticka</h1>
+
+
+    <?php
+    
+
+        include("../inc/connection.php");
+
+        $sql = "SELECT ID, name, email FROM people";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                echo "id: " . $row["ID"] . " - Name: " . $row["name"] . " " . $row["email"] . "<br>";
+            }
+        } else {
+            echo "0 results";
+        }
+        $conn->close();
+
+    
+    ?>
+
+
         </div>
 
     </div>
