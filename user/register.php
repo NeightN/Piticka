@@ -82,10 +82,10 @@ if (trim($_POST["mail"]) !== "") {
 }
 
 //kontrola shody hesel
-if ($password !== $repeat_pswd) {
+if ($pswd !== $repeat_pswd) {
 
     session_start();
-    $_SESSION['err'] = "Passwords do not match";
+    $_SESSION['err'] = "Passwords do not match: " . $pswd . " / " . $repeat_pswd;
     //--------------------
     header("location: ../index.php");
     die();
@@ -104,37 +104,6 @@ if ($stmt = $conn->prepare($sql)) {
 
     // IF SQL QUERY WENT FINE
     if ($stmt->execute()) {
-
-
-        // VERIFICATION AREA
-
-        $ver_key = serialize(bin2hex(random_bytes(18)));
-        $dateTomorrow = date("Y-m-d", strtotime("+1 day"));
-
-
-
-        // SEND MAIL
-
-
-        $mailee->From = "no-reply@scp-isolation.com";
-        $mailee->FromName = "Piticker";
-
-        $mailee->addAddress($userAddress, $username);
-
-        $mailee->isHTML(true);
-
-        $mailee->Subject = "Piticker! - Verification";
-        $mailee->Body = "<i>Generated at: </i>" . date("h:i:sa") . "<br> Verification link: " . "http://piticka.scp-isolation.com/autorization_tx_mail.php?user=" . $name . "&key=" . $ver_key . "<br>Code expires: " . $dateTomorrow;
-        $mailee->AltBody = "<i>Generated at: </i>" . date("h:i:sa") . "<br> Verification link: " . "http://piticka.scp-isolation.com/autorization_tx_mail.php?user=" . $name . "&key=" . $ver_key . "<br>Code expires: " . $dateTomorrow;
-
-        try {
-            $mailee->send();
-            echo "Message has been sent successfully";
-
-            header("location: ../autorization_tx_mail.php");
-        } catch (Exception $e) {
-            echo "Mailer Error: " . $mailee->ErrorInfo;
-        }
     } else {
 
         echo "Something went wrong.";
@@ -143,50 +112,67 @@ if ($stmt = $conn->prepare($sql)) {
         header("location: ../index.php");
     }
     $stmt->close();
-
-
-
-    // Get user ID
-    $user_ID = 0;
-    $sql = "SELECT ID FROM people WHERE name = ?";
-
-    if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("s", trim($_POST["user"]));
-
-        if ($stmt->execute()) {
-            $stmt->store_result();
-
-            if ($stmt->num_rows() == 1) {
-                //--------------------
-                $user_ID = $row[0];
-            }
-        } else {
-            echo "Something went wrong.";
-            die();
-        }
-        $stmt->close();
-    }
-
-
-
-
-
-    // Write verKey
-    $sql = "INSERT INTO awaitingVerification (user_fk, ver_code, expiry) VALUES (?, ?, ?)";
-    if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("sss", $user_ID, $ver_key, $dateTomorrow);
-    }
-    // IF SQL QUERY WENT FINE
-    if ($stmt->execute()) {
-    }
-} else {
-    //--------------------
-    session_start();
-    $_SESSION['errPswdNotMatch'] = true;
-    //--------------------
-    header("location: ../index.php");
-    die();
 }
+
+
+// VERIFICATION AREA
+
+$ver_key = serialize(bin2hex(random_bytes(18)));
+$dateTomorrow = date("Y-m-d", strtotime("+1 day"));
+
+// SEND MAIL
+$mailee->From = "no-reply@scp-isolation.com";
+$mailee->FromName = "Piticker";
+
+$mailee->addAddress($userAddress, $username);
+
+$mailee->isHTML(true);
+
+$mailee->Subject = "Piticker! - Verification";
+$mailee->Body = "<i>Generated at: </i>" . date("h:i:sa") . "<br> Verification link: " . "http://piticka.scp-isolation.com/autorization_tx_mail.php?user=" . $name . "&key=" . $ver_key . "<br>Code expires: " . $dateTomorrow;
+$mailee->AltBody = "<i>Generated at: </i>" . date("h:i:sa") . "<br> Verification link: " . "http://piticka.scp-isolation.com/autorization_tx_mail.php?user=" . $name . "&key=" . $ver_key . "<br>Code expires: " . $dateTomorrow;
+
+try {
+    $mailee->send();
+
+    echo "Message has been sent successfully";
+    header("location: ../autorization_tx_mail.php");
+} catch (Exception $e) {
+
+    echo "Mailer Error: " . $mailee->ErrorInfo;
+}
+
+
+// Get user ID
+$user_ID = 0;
+$sql = "SELECT ID FROM people WHERE name = ?";
+
+if ($stmt = $conn->prepare($sql)) {
+    $stmt->bind_param("s", trim($_POST["user"]));
+
+    if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows() == 1) {
+            //--------------------
+            $user_ID = $row[0];
+        }
+    } else {
+        echo "Something went wrong.";
+        die();
+    }
+    $stmt->close();
+}
+
+// Write verKey
+$sql = "INSERT INTO awaitingVerification (user_fk, ver_code, expiry) VALUES (?, ?, ?)";
+if ($stmt = $conn->prepare($sql)) {
+    $stmt->bind_param("sss", $user_ID, $ver_key, $dateTomorrow);
+}
+// IF SQL QUERY WENT FINE
+if ($stmt->execute()) {
+}
+
 
 
 $conn->close();
