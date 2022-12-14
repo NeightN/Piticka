@@ -24,7 +24,7 @@
 
                         <?php
 
-include("../inc/connection.php");
+                        include("inc/connection.php");
 
 
                         $headMessage = "";
@@ -34,50 +34,24 @@ include("../inc/connection.php");
 
                             $userName = $_GET["user"];
                             $userPass = $_GET['key'];
-
-
-                            include("../inc/connection.php");
-
-                            $sql = "SELECT ID, name, email FROM people";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                // output data of each row
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "id: " . $row["ID"] . " - Name: " . $row["name"] . " " . $row["email"] . "<br>";
-                                }
-                            } else {
-                                echo "0 results";
-                            }
-                            $conn->close();
-
-
-
-
-
-                            echo ("Hello world.");
+                            $savedID = 0;
+                            
 
                             // SQL USER CHECK 
-                            if ($stmt = $conn->prepare("select people.ID from people where name = ?")) {
-
-                                echo ("Hello world. 2");
+                            if ($stmt = $conn->prepare("select ID from people where name = ?")) {
 
                                 $stmt->bind_param("s", $userName);
 
-                                echo ("Hello world. 4");
-
                                 if ($stmt->execute()) {
-                                    $stmt->store_result();
-
-                                    echo "Hello Exec!";
-
-                                    if ($stmt->num_rows() != 1) {
+                                    $result = $stmt->get_result();
+                                    $row = $result->fetch_assoc();
+                                    
+                                    if ($stmt->num_rows != 1) {
                                         // Issue
                                         $contextMessage = "Invalid key or username. Please check if you copied the link properly";
                                     } else {
-
                                         // GOTO BELOW
-                                        echo "1 OK";
+                                        $savedID = $row['ID'];
                                     }
                                 } else {
                                     echo "<h1>Something went wrong.</h1>";
@@ -88,25 +62,29 @@ include("../inc/connection.php");
                                 echo ("Guhh?");
                             }
 
-                            echo ("GSAIGDHIAUSGDIAUGSD ?");
-
                             // SQL CODE
-                            $sql = "SELECT id FROM awaitingVerification WHERE ver_code = ?";
+                            $sql = "SELECT id, user_fk, expiry FROM awaitingVerification WHERE ver_code = ?";
 
                             if ($stmt = $conn->prepare($sql)) {
                                 $stmt->bind_param("s", trim($userPass));
 
                                 if ($stmt->execute()) {
-                                    $stmt->store_result();
+                                    $result = $stmt->get_result();
+                                    $row = $result->fetch_assoc();
 
-                                    if ($stmt->num_rows() != 1) {
+                                    if ($stmt->num_rows != 1) {
                                         // Issue
-
                                         $contextMessage = "Invalid key or username. Please check if you copied the link properly";
                                     } else {
-
                                         // GOTO BELOW
-                                        echo "2 OK";
+                                        $expiry = $row['expiry'];
+                                        $user_fk = $row['user_fk'];
+                                        if($user_fk != $savedID){
+                                            $contextMessage = "Invalid key or username. Please check if you copied the link properly";
+                                        }
+                                        if ($expiry < date("Y-m-d H:i:s")) {
+                                            $contextMessage = "Your key has expired. Please request a new one.";
+                                        }
                                     }
                                 } else {
                                     echo "<h1>Something went wrong.</h1>";

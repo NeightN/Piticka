@@ -52,6 +52,7 @@ if (trim($_POST["uname"]) !== "") {
 }
 
 //kontrola existujících emailů
+
 if (trim($_POST["mail"]) !== "") {
     $sql = "SELECT ID FROM people WHERE email = ?";
 
@@ -121,6 +122,7 @@ $ver_key = serialize(bin2hex(random_bytes(18)));
 $dateTomorrow = date("Y-m-d", strtotime("+1 day"));
 
 // SEND MAIL
+/*
 $mailee->From = "no-reply@scp-isolation.com";
 $mailee->FromName = "Piticker";
 
@@ -139,21 +141,21 @@ try {
 
     echo "Mailer Error: " . $mailee->ErrorInfo;
 }
-
+*/
 
 // Get user ID
 $user_ID = 0;
 $sql = "SELECT ID FROM people WHERE name = ?";
 
 if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("s", trim($_POST["user"]));
+    $stmt->bind_param("s", trim($_POST["uname"]));
 
     if ($stmt->execute()) {
-        $stmt->store_result();
-
-        if ($stmt->num_rows() == 1) {
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        if ($result->num_rows == 1) {
             //--------------------
-            $user_ID = $row[0];
+            $user_ID = $row['ID'];
         }
     } else {
         echo "Something went wrong.";
