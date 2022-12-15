@@ -35,18 +35,18 @@
                             $userName = $_GET["user"];
                             $userPass = $_GET['key'];
                             $savedID = 0;
-                            
+
+                            $sql = "SELECT ID FROM people WHERE name = ?";
 
                             // SQL USER CHECK 
-                            if ($stmt = $conn->prepare("select ID from people where name = ?")) {
-
+                            if ($stmt = $conn->prepare($sql)) {
                                 $stmt->bind_param("s", $userName);
 
                                 if ($stmt->execute()) {
                                     $result = $stmt->get_result();
                                     $row = $result->fetch_assoc();
-                                    
-                                    if ($stmt->num_rows != 1) {
+
+                                    if ($result->num_rows != 1) {
                                         // Issue
                                         $contextMessage = "Invalid key or username. Please check if you copied the link properly";
                                     } else {
@@ -73,7 +73,7 @@
                                     $result = $stmt->get_result();
                                     $row = $result->fetch_assoc();
 
-                                    if ($stmt->num_rows != 1) {
+                                    if ($result->num_rows != 1) {
                                         // Issue
                                         $contextMessage = "Invalid key or username. Please check if you copied the link properly";
                                     } else {
