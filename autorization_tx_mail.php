@@ -66,7 +66,8 @@
                             $sql = "SELECT id, user_fk, expiry FROM awaitingVerification WHERE ver_code = ?";
 
                             if ($stmt = $conn->prepare($sql)) {
-                                $stmt->bind_param("s", trim($userPass));
+                                $userPass = trim($userPass);
+                                $stmt->bind_param("s", $userPass);
 
                                 if ($stmt->execute()) {
                                     $result = $stmt->get_result();
@@ -94,7 +95,7 @@
                             }
 
                             // All above returned successfuly and user was authenticated.
-                            if ($headMessage == "") {
+                            if ($contextMessage == "") {
                                 // BELOW
                                 $headMessage = "Email verified";
                                 $contextMessage = "Thank you for verifying your account. You can now proceed to log in.";
