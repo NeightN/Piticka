@@ -48,7 +48,7 @@
 
                                     if ($result->num_rows != 1) {
                                         // Issue
-                                        $contextMessage = "Invalid key or username. Please check if you copied the link properly";
+                                        $contextMessage = "Invalid verification link. Please make sure you have copied your link properly and that the user is not already verified.";
                                     } else {
                                         // GOTO BELOW
                                         $savedID = $row['ID'];
@@ -75,16 +75,36 @@
 
                                     if ($result->num_rows != 1) {
                                         // Issue
-                                        $contextMessage = "Invalid key or username. Please check if you copied the link properly";
+                                        $contextMessage = "Invalid verification link. Please make sure you have copied your link properly and that the user is not already verified.";
                                     } else {
                                         // GOTO BELOW
                                         $expiry = $row['expiry'];
                                         $user_fk = $row['user_fk'];
-                                        if($user_fk != $savedID){
-                                            $contextMessage = "Invalid key or username. Please check if you copied the link properly";
+                                        if ($user_fk != $savedID) {
+                                            $contextMessage = "Invalid verification link. Please make sure you have copied your link properly and that the user is not already verified.";
                                         }
                                         if ($expiry < date("Y-m-d H:i:s")) {
-                                            $contextMessage = "Your key has expired. Please request a new one.";
+                                            
+                                            $contextMessage = "Your verification key has expired. Please register again.";
+                                            
+                                            // Remove key
+                                            $sql = "delete FROM awaitingVerification WHERE ver_code = ? and user_fk = ?";
+                                            if ($stmt = $conn->prepare($sql)) {
+                                                $stmt->bind_param("si", $userPass, $savedID);
+
+                                                if ($stmt->execute()) {
+                                                }
+                                            }
+
+                                            // Remove user
+                                            $sql = "delete FROM people WHERE ID= ?";
+                                            if ($stmt = $conn->prepare($sql)) {
+                                                $stmt->bind_param("i", $savedID);
+
+                                                if ($stmt->execute()) {
+                                                }
+                                            }
+                                            
                                         }
                                     }
                                 } else {
@@ -97,14 +117,30 @@
                             // All above returned successfuly and user was authenticated.
                             if ($contextMessage == "") {
                                 // BELOW
+                                // Authenticate user here by removing verificationKey entry!
+
+                                $sql = "delete FROM awaitingVerification WHERE ver_code = ? and user_fk = ?";
+
+                                if ($stmt = $conn->prepare($sql)) {
+                                    $stmt->bind_param("si", $userPass, $savedID);
+
+                                    if ($stmt->execute()) {
+                                    }
+                                }
+
                                 $headMessage = "Email verified";
                                 $contextMessage = "Thank you for verifying your account. You can now proceed to log in.";
+
+
+
                             }
+
                         } else {
 
                             $headMessage = "Awaiting confirmation";
                             $contextMessage = "Account confirmation email has been sent to your address.";
                         }
+
 
                         ?>
 
