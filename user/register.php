@@ -122,12 +122,11 @@ $ver_key = serialize(bin2hex(random_bytes(18)));
 $dateTomorrow = date("Y-m-d", strtotime("+1 day"));
 
 // SEND MAIL
-/*
+
 $mailee->From = "no-reply@scp-isolation.com";
 $mailee->FromName = "Piticker";
 
 $mailee->addAddress($userAddress, $username);
-
 $mailee->isHTML(true);
 
 $mailee->Subject = "Piticker! - Verification";
@@ -141,7 +140,7 @@ try {
 
     echo "Mailer Error: " . $mailee->ErrorInfo;
 }
-*/
+
 
 // Get user ID
 $user_ID = 0;
