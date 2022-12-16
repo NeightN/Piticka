@@ -17,41 +17,39 @@
 <body id="color-text" class="background-gradient">
     <div id="wrapper">
 
-    <?php
-    session_start();
-    include("headers/header_not_logged.php");
-    ?>
+        <?php
+        session_start();
+        include("headers/header_not_logged.php");
+        ?>
 
-    <main class="background" onmousedown='return false;' onselectstart='return false;'>
+        <main class="background" onmousedown='return false;' onselectstart='return false;'>
 
-    <!-- Header -->
-        <div class="container mt-2">
-            <!-- CONTENT TADI!!!!!  -->
+            <!-- Header -->
+            <div class="container mt-2">
+                <!-- CONTENT TADI!!!!!  -->
+                <?php include("headers/notification.php") ?>
+            </div>
 
-            <?php include("headers/notification.php") ?>
+            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
 
+        </main>
+
+        <div class="content">
+            <div class="d-flex justify-content-center align-items-baseline ">
+                <h1>Piticka</h1>
+            </div>
         </div>
 
-        <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-        <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-        <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-        <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-        <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-        <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
 
-    </main>
+        <!-- Footer -->
+        <?php include("footer/footer.php") ?>
+    </div>
 
-    <div class="content">
-        <div class="d-flex justify-content-center align-items-baseline ">
-            <h1>Piticka</h1>
-        </div>
-    </div>
-            
-    
-    <!-- Footer -->
-    <?php include("footer/footer.php") ?>
-    </div>
-    
 </body>
 
 </html>
