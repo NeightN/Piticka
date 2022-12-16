@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["pswd2"]);
     }
 
-    $sql = "select ID, name, password, admin from people where name = ?";
+    $sql = "select ID, name, password, admin, user_fk from people inner join awaitingverification on people.user_fk  where name = ?";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("s", $param_username);
         $param_username = $username;
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         header("location: ../index2.php");
                     } else{
                         session_start();
-                        $_SESSION['errNameOrPswd'] = true;
+                        $_SESSION['err'] = "Username or password invalid.";
                         header("location: ../index.php");
                         die();
                     }
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             else{
                 session_start();
-                $_SESSION['errNameOrPswd'] = true;
+                $_SESSION['err'] = "Username or password invalid.";
                 header("location: ../index.php");
                 die();
             }
