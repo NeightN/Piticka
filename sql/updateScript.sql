@@ -211,18 +211,7 @@ INSERT INTO `types` (`ID`, `typ`) VALUES
 ALTER TABLE `drinks`
   ADD CONSTRAINT `fk_people` FOREIGN KEY (`id_people`) REFERENCES `people` (`ID`),
   ADD CONSTRAINT `fk_types` FOREIGN KEY (`id_types`) REFERENCES `types` (`ID`);
-
-select people.name, types.typ, count(drinks.ID) as pocet
-from drinks inner join people on drinks.id_people = people.ID 
-left join types on drinks.id_types = types.ID
-group by people.name, types.typ;
-
-select people.name, types.typ, count(drinks.ID) as pocet, month(date) as mesic
-from drinks inner join people on drinks.id_people = people.ID 
-inner join types on drinks.id_types = types.ID
-where people.ID = 1
-group by people.name, types.typ, month(date);
-
+  
 Alter table types
 add davky float;
 
@@ -258,4 +247,15 @@ create table awaitingVerification
     ver_code varchar(64) ,
     expiry datetime
 );
+
+select people.name, types.typ, count(drinks.ID) as pocet
+from drinks inner join people on drinks.id_people = people.ID 
+left join types on drinks.id_types = types.ID
+group by people.name, types.typ;
+
+select people.name, types.typ, count(drinks.ID) as pocet, month(date) as mesic
+from drinks inner join people on drinks.id_people = people.ID 
+inner join types on drinks.id_types = types.ID
+where people.ID = 1
+group by people.name, types.typ, month(date);
 
