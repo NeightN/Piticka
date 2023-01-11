@@ -21,12 +21,13 @@ if (isset($_SESSION['uname']) != null) {
 if (isset($_SESSION['admin']) != null) {
     $admin = $_SESSION['admin'];
 }
+if (isset($_SESSION['ID']) != null) {
+    $id = $_SESSION['ID'];
+}
 ?>
 
 <body id="color-text" class="background-gradient">
     <div id="wrapper">
-
-
 
         <!-- Header -->
         <?php include("headers/header_logged.php"); ?>
