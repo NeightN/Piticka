@@ -18,7 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     //$sql = "select people.ID, name, password, admin, user_fk from people inner join awaitingverification on people.user_fk  where name = ?";
-    $sql = "SELECT people.ID, people.name, people.password, people.admin, user_fk FROM people INNER JOIN awaitingverification ON awaitingverification.user_fk WHERE name = ?";
+    $sql = "
+    SELECT people.ID, people.name, people.password, people.admin FROM people WHERE NOT EXISTS(Select * from awaitingVerification where awaitingVerification.id = people.ID) and people.name = ?";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("s", $param_username);
         $param_username = $username;
