@@ -21,12 +21,13 @@ if (isset($_SESSION['uname']) != null) {
 if (isset($_SESSION['admin']) != null) {
     $admin = $_SESSION['admin'];
 }
+if (isset($_SESSION['ID']) != null) {
+    $id = $_SESSION['ID'];
+}
 ?>
 
 <body id="color-text" class="background-gradient">
     <div id="wrapper">
-
-
 
         <!-- Header -->
         <?php include("headers/header_logged.php"); ?>
@@ -56,11 +57,9 @@ if (isset($_SESSION['admin']) != null) {
             <div class="container my-4">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item border-accordin-own">
-                        <h2 class="accordion-header" id="flush-headingOne">
                             <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                 Výpis vypitých pitíček:
                             </button>
-                        </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse bg-pale-taupe" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <table class="accordion-body table table-hover m-0">
                                 <tr>
@@ -89,11 +88,10 @@ if (isset($_SESSION['admin']) != null) {
                         </div>
                     </div>
                     <div class="accordion-item border-accordin-own">
-                        <h2 class="accordion-header" id="flush-headingTwo">
                             <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                 Výpis dle měsíců:
                             </button>
-                        </h2>
+
                         <div id="flush-collapseTwo" class="accordion-collapse collapse bg-pale-taupe" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                             <script>
                                 function showUser(str) {
@@ -139,11 +137,10 @@ if (isset($_SESSION['admin']) != null) {
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingThree">
                             <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                                 Výpis kolik za nápoj zaplatí:
                             </button>
-                        </h2>
+
                         <div id="flush-collapseThree" class="accordion-collapse collapse bg-pale-taupe" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                             <script>
                                 function showTypes(str) {
@@ -195,7 +192,50 @@ if (isset($_SESSION['admin']) != null) {
                 <form class="mt-5" action="" method="POST">
                     <div class="input-group mb-3">
                         <input placeholder="Napište, kolik jste toho vypil a čeho..." type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">Button</button>
+                        <div>
+                            <script>
+                                function showUser(str) {
+                                    if (str == "") {
+                                        document.getElementById("txtHint2").innerHTML = "";
+                                        return;
+                                    }
+                                    var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.onreadystatechange = function() {
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            document.getElementById("txtHint2").innerHTML = this.responseText;
+                                        }
+                                    }
+                                    xmlhttp.open("GET", "getDrinksM.php?q=" + str, true);
+                                    xmlhttp.send();
+                                }
+                            </script>
+                            <form>
+                                <?php
+                                include("inc/connection.php");
+
+                                $sql = "select ID, typ from types"; //select
+                                $result = $conn->query($sql); //fetch data from db to result
+
+                                $person = "<select type='button' class='form-select btn bg-coffee dropdown-toggle text-white' aria-label='Default select example' name='types' onchange='showUser(this.value)'>"; //zacatek dropdownl listu (select-option)
+                                $person .= "<option selected>Zvolte uživatele:</option>";
+                                if ($result->num_rows > 0) //kontrola zda jsme neco nacetli
+                                {
+
+                                    while ($row = $result->fetch_assoc()) {
+                                        $person .= "<option value='" . $row["ID"] . "'>" . $row["typ"] . "</option>";
+                                    }
+                                } else {
+                                    echo "0 result";
+                                }
+                                $person .= "</select>";
+                                $conn->close(); //uzavreni pripojeni    
+                                ?>
+                            </form>
+
+                            <?php echo $person; ?>
+                            <div id="txtHint2"></div>
+                        </div>
+                        <button class="btn bg-dark-coffee text-white" type="button" id="button-addon1">Potvrdit</button>
                     </div>
                 </form>
 
