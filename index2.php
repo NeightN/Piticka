@@ -57,9 +57,9 @@ if (isset($_SESSION['ID']) != null) {
             <div class="container my-4">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item border-accordin-own">
-                            <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Výpis vypitých pitíček:
-                            </button>
+                        <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Výpis vypitých pitíček:
+                        </button>
                         <div id="flush-collapseOne" class="accordion-collapse collapse bg-pale-taupe" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <table class="accordion-body table table-hover m-0">
                                 <tr>
@@ -88,9 +88,9 @@ if (isset($_SESSION['ID']) != null) {
                         </div>
                     </div>
                     <div class="accordion-item border-accordin-own">
-                            <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                Výpis dle měsíců:
-                            </button>
+                        <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Výpis dle měsíců:
+                        </button>
 
                         <div id="flush-collapseTwo" class="accordion-collapse collapse bg-pale-taupe" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                             <script>
@@ -137,9 +137,9 @@ if (isset($_SESSION['ID']) != null) {
                         </div>
                     </div>
                     <div class="accordion-item">
-                            <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                Výpis kolik za nápoj zaplatí:
-                            </button>
+                        <button class="accordion-button collapsed bg-coffee text-desert-sand" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            Výpis kolik za nápoj zaplatí:
+                        </button>
 
                         <div id="flush-collapseThree" class="accordion-collapse collapse bg-pale-taupe" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                             <script>
@@ -191,24 +191,8 @@ if (isset($_SESSION['ID']) != null) {
 
                 <form class="mt-5" action="" method="POST">
                     <div class="input-group mb-3">
-                        <input placeholder="Napište, kolik jste toho vypil a čeho..." type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input placeholder="Napište, kolik jste toho vypil a čeho..." type="number" min="0" max="100" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                         <div>
-                            <script>
-                                function showUser(str) {
-                                    if (str == "") {
-                                        document.getElementById("txtHint2").innerHTML = "";
-                                        return;
-                                    }
-                                    var xmlhttp = new XMLHttpRequest();
-                                    xmlhttp.onreadystatechange = function() {
-                                        if (this.readyState == 4 && this.status == 200) {
-                                            document.getElementById("txtHint2").innerHTML = this.responseText;
-                                        }
-                                    }
-                                    xmlhttp.open("GET", "getDrinksM.php?q=" + str, true);
-                                    xmlhttp.send();
-                                }
-                            </script>
                             <form>
                                 <?php
                                 include("inc/connection.php");
@@ -216,38 +200,31 @@ if (isset($_SESSION['ID']) != null) {
                                 $sql = "select ID, typ from types"; //select
                                 $result = $conn->query($sql); //fetch data from db to result
 
-                                $person = "<select type='button' class='form-select btn bg-coffee dropdown-toggle text-white' aria-label='Default select example' name='types' onchange='showUser(this.value)'>"; //zacatek dropdownl listu (select-option)
-                                $person .= "<option selected>Zvolte uživatele:</option>";
+                                $drink = "<select type='button' class='form-select btn bg-coffee dropdown-toggle text-white' aria-label='Default select example' name='types' onchange='showUser(this.value)'>"; //zacatek dropdownl listu (select-option)
+                                $drink .= "<option selected>Zvolte uživatele:</option>";
                                 if ($result->num_rows > 0) //kontrola zda jsme neco nacetli
                                 {
-
                                     while ($row = $result->fetch_assoc()) {
-                                        $person .= "<option value='" . $row["ID"] . "'>" . $row["typ"] . "</option>";
+                                        $drink .= "<option value='" . $row["ID"] . "'>" . $row["typ"] . "</option>";
                                     }
                                 } else {
                                     echo "0 result";
                                 }
-                                $person .= "</select>";
+                                $drink .= "</select>";
                                 $conn->close(); //uzavreni pripojeni    
                                 ?>
                             </form>
 
-                            <?php echo $person; ?>
-                            <div id="txtHint2"></div>
+                            <?php echo $drink; ?>
                         </div>
                         <button class="btn bg-dark-coffee text-white" type="button" id="button-addon1">Potvrdit</button>
                     </div>
                 </form>
-
-
-
-
-
             </div>
         </div>
 
-                    <!-- Footer -->
-                    <?php include("footer/footer.php") ?>
+        <!-- Footer -->
+        <?php include("footer/footer.php") ?>
 
     </div>
 
