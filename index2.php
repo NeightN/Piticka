@@ -24,13 +24,18 @@ if (isset($_SESSION['admin']) != null) {
 if (isset($_SESSION['ID']) != null) {
     $id = $_SESSION['ID'];
 }
+
+
 ?>
 
 <body id="color-text" class="background-gradient">
     <div id="wrapper">
 
         <!-- Header -->
-        <?php include("headers/header_logged.php"); ?>
+        <?php 
+        $page = $_SESSION['page'] = "index2.php";
+        include("headers/header_logged.php"); 
+        ?>
 
         <!-- Main -->
         <main class="main-height background-main">
