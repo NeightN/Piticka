@@ -26,9 +26,14 @@
                         <li>
                             <a class="dropdown-item" href="#">Settings</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="user/logout.php">Logout</a>
-                        </li>
+                        <?php
+                        if (isset($_SESSION['page']) && $_SESSION['page'] == "index2.php") {
+                            echo '<a class="dropdown-item" href="user/logout.php">Logout</a>';
+                        }
+                        if (isset($_SESSION['page']) && $_SESSION['page'] == "profile.php") {
+                            echo '<a class="dropdown-item" href="../user/logout.php">Logout</a>';
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>

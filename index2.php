@@ -32,9 +32,9 @@ if (isset($_SESSION['ID']) != null) {
     <div id="wrapper">
 
         <!-- Header -->
-        <?php 
+        <?php
         $page = $_SESSION['page'] = "index2.php";
-        include("headers/header_logged.php"); 
+        include("headers/header_logged.php");
         ?>
 
         <!-- Main -->
@@ -194,35 +194,35 @@ if (isset($_SESSION['ID']) != null) {
 
                 <!-- inputs  -->
 
-                <form class="mt-5" action="" method="POST">
+                <form class="mt-5" action="insert/insert_drinks.php" method="POST">
                     <div class="input-group mb-3">
-                        <input placeholder="Napište, kolik jste toho vypil a čeho..." type="number" min="0" max="100" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input placeholder="Napište, kolik jste toho vypil a čeho..." name="number_dinks" type="number" min="0" max="100" class="form-control">
                         <div>
-                            <form>
-                                <?php
-                                include("inc/connection.php");
+                            <?php
+                            include("inc/connection.php");
 
-                                $sql = "select ID, typ from types"; //select
-                                $result = $conn->query($sql); //fetch data from db to result
+                            $sql = "select ID, typ from types";
+                            $result = $conn->query($sql);
 
-                                $drink = "<select type='button' class='form-select btn bg-coffee dropdown-toggle text-white' aria-label='Default select example' name='types' onchange='showUser(this.value)'>"; //zacatek dropdownl listu (select-option)
-                                $drink .= "<option selected>Zvolte uživatele:</option>";
-                                if ($result->num_rows > 0) //kontrola zda jsme neco nacetli
-                                {
-                                    while ($row = $result->fetch_assoc()) {
-                                        $drink .= "<option value='" . $row["ID"] . "'>" . $row["typ"] . "</option>";
-                                    }
-                                } else {
-                                    echo "0 result";
+                            $drink = "<select type='button' class='dropdown-coffee form-select btn bg-coffee dropdown-toggle text-white' aria-label='Default select example' name='types'>"; //zacatek dropdownl listu (select-option)
+                            $drink .= "<option selected>Zvolte pitíčko:</option>";
+                            if ($result->num_rows > 0)
+                            {
+                                while ($row = $result->fetch_assoc()) {
+                                    $drink .= "<option name='typ' value='" . $row["ID"] . "'>" . $row["typ"] . "</option>";
                                 }
-                                $drink .= "</select>";
-                                $conn->close(); //uzavreni pripojeni    
-                                ?>
-                            </form>
-
+                            } else {
+                                echo "0 result";
+                            }
+                            $drink .= "</select>";
+                            ?>
                             <?php echo $drink; ?>
                         </div>
-                        <button class="btn bg-dark-coffee text-white" type="button" id="button-addon1">Potvrdit</button>
+                        <?php 
+                        ?>
+                        <button class="btn bg-dark-coffee text-white" type="submit">Potvrdit</button>
+                        <?php $conn->close(); //uzavreni pripojeni
+                        ?>
                     </div>
                 </form>
             </div>

@@ -36,7 +36,7 @@ if (isset($_SESSION['ID']) != null) {
         ?>
 
         <!-- Main -->
-        <main class="main-height background-main">
+        <main class="main-height background-main content">
             <div class="container mt-2">
                 <?php include("../headers/notification.php") ?>
                 <!-- CONTENT TADI!!!!!  -->
@@ -83,9 +83,19 @@ if (isset($_SESSION['ID']) != null) {
                         </div>
                     </div>
                 </div>
+
+                
+                <div class="mt-5">
+                    <div class="alert bg-desert-sand" role="alert">
+                        <h4 class="alert-heading text-brandy">Nové upozornění!</h4>
+                        <p class="text-dark-coffee">Předchozí měsíc jste vypili nejvíce ...</p>
+                        <hr>
+                        <p class="mb-0 text-dark-coffee">Udělejte svým kolegům radost a kupte pro tento měsíc další!</p>
+                    </div>
+                </div>
+
             </div>
         </main>
-
 
         <!-- Footer -->
         <?php include("../footer/footer.php") ?>
