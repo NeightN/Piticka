@@ -196,7 +196,7 @@ if (isset($_SESSION['ID']) != null) {
 
                 <form class="mt-5" action="insert/insert_drinks.php" method="POST">
                     <div class="input-group mb-3">
-                        <input placeholder="Napište, kolik jste toho vypil a čeho..." name="number_dinks" type="number" min="0" max="100" class="form-control">
+                        <input placeholder="Napište, kolik jste toho vypil a čeho..." name="number_drinks" type="number" min="0" max="100" class="form-control">
                         <div>
                             <?php
                             include("inc/connection.php");
@@ -205,11 +205,11 @@ if (isset($_SESSION['ID']) != null) {
                             $result = $conn->query($sql);
 
                             $drink = "<select type='button' class='dropdown-coffee form-select btn bg-coffee dropdown-toggle text-white' aria-label='Default select example' name='types'>"; //zacatek dropdownl listu (select-option)
-                            $drink .= "<option selected>Zvolte pitíčko:</option>";
+                            $drink .= "<option selected value='null'>Zvolte pitíčko:</option>";
                             if ($result->num_rows > 0)
                             {
                                 while ($row = $result->fetch_assoc()) {
-                                    $drink .= "<option name='typ' value='" . $row["ID"] . "'>" . $row["typ"] . "</option>";
+                                    $drink .= "<option name='types' value='" .$row["typ"] . "'>" . $row["typ"] . "</option>";
                                 }
                             } else {
                                 echo "0 result";
@@ -219,7 +219,10 @@ if (isset($_SESSION['ID']) != null) {
                             <?php echo $drink; ?>
                         </div>
                         <?php 
+
+                        echo '<button class="btn bg-dark-coffee text-white" type="submit">Potvrdit</button>';
                         ?>
+
                         <button class="btn bg-dark-coffee text-white" type="submit">Potvrdit</button>
                         <?php $conn->close(); //uzavreni pripojeni
                         ?>
