@@ -15,33 +15,41 @@
 </head>
 
 <body id="color-text" class="background-gradient">
-    <div id="wrapper">
+
+            <div style="position: relative;">
+                <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+                <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
+            </div>
+
+
+<div id="wrapper">
 
         <?php
         session_start();
         include("headers/header_not_logged.php");
         ?>
 
-        <main class="background" onmousedown='return false;' onselectstart='return false;'>
-
+        <main class="background">
             <!-- Header -->
             <div class="container mt-2">
                 <!-- CONTENT TADI!!!!!  -->
                 <?php include("headers/notification.php") ?>
             </div>
-
-            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-            <img class="svg_animation filter-default" src="img/bean.svg" alt="bean.svg" />
-
         </main>
 
         <div class="content">
-            <div class="d-flex justify-content-center align-items-baseline ">
+            <div class="d-flex justify-content-center align-items-center flex-column">
                 <h1>Piticka</h1>
+
+                <p>Pro pokračování se přihlaště. </p>
+                <button class="btn bg-pale-taupe text-dark-coffee" type="button" data-bs-toggle="offcanvas" data-bs-target="#login">
+                    Log in
+                </button>
+
             </div>
         </div>
 

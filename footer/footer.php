@@ -1,6 +1,6 @@
 <footer class="footer-height bg-coffee navbar-dark">
+<div class="container mt-5">
                 <div class="container-fluid row" id="list-s-t">
-                    <h3 class="text-desert-sand">Podívejte se na:</h3>
                     <div class="col">
                         <ul>
                             <li class="nav-item"><a class="nav-link" href="index.html">Domů</a></li>
@@ -50,5 +50,6 @@
                             </li>
                         </ul>
                     </div>
+                </div>
                 </div>
             </footer>
