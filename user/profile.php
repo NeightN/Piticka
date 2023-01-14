@@ -24,6 +24,8 @@ if (isset($_SESSION['admin']) != null) {
 if (isset($_SESSION['ID']) != null) {
     $id = $_SESSION['ID'];
 }
+
+$number_types = 0;
 ?>
 
 <body id="color-text" class="background-gradient">
@@ -51,18 +53,19 @@ if (isset($_SESSION['ID']) != null) {
                             <?php
                             include("../inc/connection.php"); //pripojeni k databazi
 
-                            $sql = "select people.name, types.typ, count(drinks.ID) as pocet, types.davky, month(date) as mesic
+                            $sql = "select people.name, types.typ, count(drinks.ID) as pocet, types.davky, month(date) as mesic, year(date) as rok
                                     from drinks inner join people on drinks.id_people = people.ID
                                     inner join types on drinks.id_types = types.ID
                                     where people.name = '" . $name . "'
                                     group by people.name, types.typ, month(date)
-                                    order by mesic DESC;";
+                                    order by rok DESC, mesic DESC;";
                             $result = mysqli_query($conn, $sql);
                             echo "<table class='accordion-body m-0 table table-hover'>
                                     <tr>
                                         <th>Typ</th>
                                         <th>Počet</th>
                                         <th>Měsíc</th>
+                                        <th>Rok</th>
                                         <th>Cena</th>
                                     </tr>";
                             while ($row = mysqli_fetch_array($result)) {
@@ -70,6 +73,7 @@ if (isset($_SESSION['ID']) != null) {
                                 echo "<td>" . $row['typ'] . "</td>";
                                 echo "<td>" . $row['pocet'] . "</td>";
                                 echo "<td>" . $row['mesic'] . "</td>";
+                                echo "<td>" . $row['rok'] . "</td>";
                                 $davka = $row["davky"];
                                 $pocet = $row["pocet"];
                                 $celkem = $davka * $pocet * 300;
@@ -84,7 +88,30 @@ if (isset($_SESSION['ID']) != null) {
                     </div>
                 </div>
 
-                
+                <?php
+                if ($admin = 1) {
+                    include("../inc/connection.php"); //pripojeni k databazi
+                    $sql = "select people.name, types.typ, count(drinks.ID) as pocet, types.davky, month(date) as mesic
+                            from drinks inner join people on drinks.id_people = people.ID
+                            inner join types on drinks.id_types = types.ID
+                            group by people.name, types.typ, month(date)
+                            order by mesic DESC;";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_array($result)) {
+                        echo '
+                        <div class="mt-5">
+                            <div class="alert bg-desert-sand" role="alert">
+                                <h4 class="alert-heading text-brandy">Nákup pro tento měsíc od "' . $row['name'] . '"!</h4>
+                                <p class="text-dark-coffee">Předchozí měsíc vypil nejvíce ...</p>
+                                <hr>
+                                <p class="mb-0 text-dark-coffee">Určitě chce udělat radost svým kolegům a koupit pro tento měsíc další ' . $row['typ'] . '!</p>
+                            </div>
+                        </div>';
+                    }
+                    mysqli_close($conn);
+                }
+                ?>
+
                 <div class="mt-5">
                     <div class="alert bg-desert-sand" role="alert">
                         <h4 class="alert-heading text-brandy">Nové upozornění!</h4>
@@ -93,7 +120,6 @@ if (isset($_SESSION['ID']) != null) {
                         <p class="mb-0 text-dark-coffee">Udělejte svým kolegům radost a kupte pro tento měsíc další!</p>
                     </div>
                 </div>
-
             </div>
         </main>
 

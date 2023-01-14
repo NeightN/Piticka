@@ -205,7 +205,7 @@ if (isset($_SESSION['ID']) != null) {
                             $result = $conn->query($sql);
 
                             $drink = "<select type='button' class='dropdown-coffee form-select btn bg-coffee dropdown-toggle text-white' aria-label='Default select example' name='types'>"; //zacatek dropdownl listu (select-option)
-                            $drink .= "<option selected value='null'>Zvolte pitíčko:</option>";
+                            $drink .= "<option selected>Zvolte pitíčko:</option>";
                             if ($result->num_rows > 0)
                             {
                                 while ($row = $result->fetch_assoc()) {

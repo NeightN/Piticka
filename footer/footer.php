@@ -13,15 +13,12 @@
                         <ul>
                             <li class="nav-item"><a class="nav-link" href="#">Spolupráce</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Pomoc</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Kariéra</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Podpora</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Speciální</a></li>
                         </ul>
                     </div>
                     <div class="col">
                         <ul>
-                            <li class="nav-item"><a class="nav-link" href="#">Speciální</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Nové produkty</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Reklamace</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Ochrana osobních údajů</a></li>
                         </ul>
                     </div>
