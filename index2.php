@@ -196,7 +196,7 @@ if (isset($_SESSION['ID']) != null) {
 
                 <form class="mt-5" action="insert/insert_drinks.php" method="POST">
                     <div class="input-group mb-3">
-                        <input placeholder="Napište, kolik jste toho vypil a čeho..." name="number_drinks" type="number" min="0" max="100" class="form-control">
+                        <input placeholder="Napište, kolik jste toho vypil a čeho..." name="number_drinks" type="number" min="0" max="5" class="form-control">
                         <div>
                             <?php
                             include("inc/connection.php");
