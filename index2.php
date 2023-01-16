@@ -218,11 +218,6 @@ if (isset($_SESSION['ID']) != null) {
                             ?>
                             <?php echo $drink; ?>
                         </div>
-                        <?php 
-
-                        echo '<button class="btn bg-dark-coffee text-white" type="submit">Potvrdit</button>';
-                        ?>
-
                         <button class="btn bg-dark-coffee text-white" type="submit">Potvrdit</button>
                         <?php $conn->close(); //uzavreni pripojeni
                         ?>

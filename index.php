@@ -36,7 +36,6 @@
         <main class="background">
             <!-- Header -->
             <div class="container mt-2">
-                <!-- CONTENT TADI!!!!!  -->
                 <?php include("headers/notification.php") ?>
             </div>
         </main>
@@ -52,8 +51,6 @@
 
             </div>
         </div>
-
-
         <!-- Footer -->
         <?php include("footer/footer.php") ?>
     </div>

@@ -11,7 +11,7 @@
 
     include("inc/connection.php"); //pripojeni k databazi
 
-    $sql = "select people.name, types.typ, count(drinks.ID) as pocet, month(date) as mesic
+    $sql = "select people.name, types.typ, count(drinks.ID) as pocet, month(date) as mesic, year(date) as rok
     from drinks inner join people on drinks.id_people = people.ID 
     inner join types on drinks.id_types = types.ID
     where people.ID = '" . $q . "'
@@ -23,12 +23,14 @@
                 <th>Typ</th>
                 <th>Počet</th>
                 <th>Měsíc</th>
+                <th>Rok</th>
             </tr>";
     while ($row = mysqli_fetch_array($result)) {
         echo "<tr>";
         echo "<td>" . $row['typ'] . "</td>";
         echo "<td>" . $row['pocet'] . "</td>";
         echo "<td>" . $row['mesic'] . "</td>";
+        echo "<td>" . $row['rok'] . "</td>";
         echo "</tr>";
     }
     echo "</table>";
