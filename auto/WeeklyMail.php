@@ -64,11 +64,8 @@ while ($user = $resultUsr->fetch_assoc()) {
     $email_content.= "<tr><td>Vše</td><td>". array_sum($array_celkem_pocet) ."</td><td></td><td>". array_sum($array_celkem_cena) ." Kč</td></tr>";
     $email_content.= "</table>";
 
-    echo 'Content:';
-    echo $email_content;
-    
-
     $to = $user['email'];
+    echo $user['email'];
     $subject = 'Piticker - Týdenní Přehled';
     $message = $email_content;
 
@@ -77,8 +74,13 @@ while ($user = $resultUsr->fetch_assoc()) {
                'X-Mailer: PHP/' . phpversion();
     
     
-               mail($to, $subject, $message, $headers);
-}
+               echo mail($to, $subject, $message, $headers);
+    
+               echo 'Content:';
+               echo $email_content;
+               
+
+    }
 
 // Close the database connection
 
