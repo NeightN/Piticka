@@ -24,8 +24,6 @@ if (isset($_SESSION['admin']) != null) {
 if (isset($_SESSION['ID']) != null) {
     $id = $_SESSION['ID'];
 }
-
-$number_types = 0;
 ?>
 
 <body id="color-text" class="background-gradient">
@@ -89,37 +87,72 @@ $number_types = 0;
                 </div>
 
                 <?php
-                if ($admin = 1) {
+                if ($admin == 1) {
                     include("../inc/connection.php"); //pripojeni k databazi
-                    $sql = "select people.name, types.typ, count(drinks.ID) as pocet, types.davky, month(date) as mesic
-                            from drinks inner join people on drinks.id_people = people.ID
-                            inner join types on drinks.id_types = types.ID
-                            group by people.name, types.typ, month(date)
-                            order by mesic DESC;";
+                    $sql = "select typ from types;";
                     $result = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_array($result)) {
-                        echo '
+                    while ($row_2 = mysqli_fetch_array($result)) {
+                        $prev_month = date("Y-m-d", strtotime("first day of previous month"));
+                        $prev_month_end = date("Y-m-d", strtotime("last day of previous month"));
+                        $sql = "SELECT people.name, types.typ, COUNT(drinks.ID) as pocet, types.davky, MONTH(date) as mesic, year(date) as rok
+                            FROM drinks 
+                            INNER JOIN people ON drinks.id_people = people.ID
+                            INNER JOIN types ON drinks.id_types = types.ID
+                            WHERE date >= '2022-12-01' AND date <= '2022-12-31' AND types.typ = '" . $row_2['typ'] . "'
+                            GROUP BY people.name, types.typ, MONTH(date)
+                            ORDER BY pocet DESC, people.name
+                            limit 1
+                            ;";
+                        $result_2 = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_array($result_2)) {
+                            echo '
                         <div class="mt-5">
                             <div class="alert bg-desert-sand" role="alert">
-                                <h4 class="alert-heading text-brandy">Nákup pro tento měsíc od "' . $row['name'] . '"!</h4>
-                                <p class="text-dark-coffee">Předchozí měsíc vypil nejvíce ...</p>
+                                <h4 class="alert-heading text-brandy"><b>' . $row['name'] . '</b> má tento měsíc nakoupit <b>' . $row['typ'] . '</b>!</h4>
+                                <p class="text-dark-coffee">Předchozí měsíc vypil ze všech nejvíce <b>(' . $row['pocet'] . ')</b>!</p>
                                 <hr>
                                 <p class="mb-0 text-dark-coffee">Určitě chce udělat radost svým kolegům a koupit pro tento měsíc další ' . $row['typ'] . '!</p>
                             </div>
                         </div>';
+                        }
                     }
                     mysqli_close($conn);
                 }
                 ?>
 
-                <div class="mt-5">
-                    <div class="alert bg-desert-sand" role="alert">
-                        <h4 class="alert-heading text-brandy">Nové upozornění!</h4>
-                        <p class="text-dark-coffee">Předchozí měsíc jste vypili nejvíce ...</p>
-                        <hr>
-                        <p class="mb-0 text-dark-coffee">Udělejte svým kolegům radost a kupte pro tento měsíc další!</p>
-                    </div>
-                </div>
+                <?php
+                include("../inc/connection.php"); //pripojeni k databazi
+                $sql = "select typ from types;";
+                $result = mysqli_query($conn, $sql);
+                while ($row_2 = mysqli_fetch_array($result)) {
+                    $prev_month = date("Y-m-d", strtotime("first day of previous month"));
+                    $prev_month_end = date("Y-m-d", strtotime("last day of previous month"));
+                    $sql = "SELECT people.name, types.typ, COUNT(drinks.ID) as pocet, types.davky, MONTH(date) as mesic, year(date) as rok
+                            FROM drinks 
+                            INNER JOIN people ON drinks.id_people = people.ID
+                            INNER JOIN types ON drinks.id_types = types.ID
+                            WHERE date >= '2022-12-01' AND date <= '2022-12-31' AND types.typ = '" . $row_2['typ'] . "'
+                            GROUP BY people.name, types.typ, MONTH(date)
+                            ORDER BY pocet DESC, people.name
+                            limit 1
+                            ;";
+                    $result_2 = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_array($result_2)) {
+                        if ($row['name'] == $name) {
+                            echo '
+                        <div class="mt-5 mb-5">
+                            <div class="alert bg-desert-sand" role="alert">
+                                <h4 class="alert-heading text-brandy">Nové upozornění!</h4>
+                                <p class="text-dark-coffee">Předchozí měsíc jste vypili nejvíce <b>'.$row['typ'].'</b> <b>('.$row['pocet'].')</b>.</p>
+                                <hr>
+                                <p class="mb-0 text-dark-coffee">Udělejte svým kolegům radost a kupte pro tento měsíc další!</p>
+                            </div>
+                        </div>';
+                        }
+                    }
+                }
+                mysqli_close($conn);
+                ?>
             </div>
         </main>
 
