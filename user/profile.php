@@ -55,7 +55,7 @@ if (isset($_SESSION['ID']) != null) {
                                     from drinks inner join people on drinks.id_people = people.ID
                                     inner join types on drinks.id_types = types.ID
                                     where people.name = '" . $name . "'
-                                    group by people.name, types.typ, month(date)
+                                    group by people.name, types.typ, mesic, types.davky, rok
                                     order by rok DESC, mesic DESC;";
                             $result = mysqli_query($conn, $sql);
                             echo "<table class='accordion-body m-0 table table-hover'>
@@ -132,7 +132,7 @@ if (isset($_SESSION['ID']) != null) {
                             INNER JOIN people ON drinks.id_people = people.ID
                             INNER JOIN types ON drinks.id_types = types.ID
                             WHERE date >= '2022-12-01' AND date <= '2022-12-31' AND types.typ = '" . $row_2['typ'] . "'
-                            GROUP BY people.name, types.typ, MONTH(date)
+                            GROUP BY people.name, types.typ, types.davky, mesic, rok
                             ORDER BY pocet DESC, people.name
                             limit 1
                             ;";

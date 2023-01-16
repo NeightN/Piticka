@@ -14,7 +14,7 @@
     from drinks inner join people on drinks.id_people = people.ID 
     left join types on drinks.id_types = types.ID
     where people.ID = '" . $q . "'
-    group by people.name, types.typ;";
+    group by people.name, types.typ, types.davky;";
 
     $result = mysqli_query($conn, $sql);
     echo "<table class='accordion-body m-0 table table-hover'>
